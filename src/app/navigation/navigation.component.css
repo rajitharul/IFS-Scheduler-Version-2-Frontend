@@ -1,0 +1,15 @@
+.navigation{
+    position: fixed;
+    bottom: 0;
+    left: 20;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 73%;
+    border-top: 1px solid rgb(179, 178, 178);
+    background: rgb(188, 131, 235);
+}    
+
+button{
+    margin: 10px;
+}

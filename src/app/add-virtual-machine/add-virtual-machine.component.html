@@ -1,0 +1,53 @@
+<div class="col-md-6 offset-md-3">
+
+    <h3 >
+        Add Virtual Machine
+    </h3>
+    <form (ngSubmit) ="onSubmit()">
+    
+        <div class="form-group">
+            <label >
+                Product Name
+            </label>
+    
+            <input type="text" class="form-control" id="product"
+                [(ngModel)]="virtualMachine.product" name="product">
+    
+        </div>
+    
+        <div class="form-group">
+            <label >
+                Version
+            </label>
+    
+            <input type="text" class="form-control" id="version"
+                [(ngModel)]="virtualMachine.version" name="version">
+    
+        </div>
+    
+        <div class="form-group">
+            <label >
+                Region
+            </label>
+    
+            <input type="text" class="form-control" id="region"
+                [(ngModel)]="virtualMachine.region" name="region">
+    
+        </div>
+
+        <div class="form-group">
+            <label >
+                Status
+            </label>
+    
+            <input type="text" class="form-control" id="status"
+                [(ngModel)]="virtualMachine.status" name="status">
+    
+        </div>
+    
+        <button class="btn btn-dark" type="submit">Add Virtual Machine</button>
+    
+    </form>
+
+</div>
+

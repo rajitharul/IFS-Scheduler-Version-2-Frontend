@@ -1,0 +1,62 @@
+<div class="header">
+    <h1>Add Leave Note</h1>
+</div>
+
+<div class="add-task">
+    <div class="content">
+        <form [formGroup]="taskForm" (submit)="addTask()">
+            <mat-form-field class=" example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Approved or Rejected" value="Approved or Rejected" formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Leave Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let n of typeOption" [value]="n.type">{{n.type}}</mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+            <!-- 
+            <mat-form-field appearance="fill">
+                <mat-label>Leave Type</mat-label>
+                <mat-radio-button formControlName="type" *ngFor="let n of typeOption" [value]="n.type">
+                    {{n.type}}
+                </mat-radio-button>
+            </mat-form-field> -->
+            <!-- <label id="example-radio-group-label">Pick your favorite season</label>
+            <br>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                [(ngModel)]="favoriteSeason">
+                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                    {{season}}
+                </mat-radio-button>
+            </mat-radio-group> -->
+
+
+
+
+
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label> Description</mat-label>
+                <textarea matInput placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+            <button [disabled]="taskForm.invalid" type="submit" mat-raised-button color="primary">Submit</button>
+
+
+        </form>
+
+    </div>
+
+</div>

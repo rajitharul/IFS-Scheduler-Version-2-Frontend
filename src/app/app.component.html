@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg bd-navbar">
+
+  <a class="navbar-brand" href="#">IFS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="home">Home</a>
+      </li>
+
+      <li *ngIf="authority === 'manager'" class="nav-item">
+        <a class="nav-link" routerLink="manager">Manager Board</a>
+      </li>
+
+      <li *ngIf="authority === 'depmanager'" class="nav-item">
+        <a class="nav-link" routerLink="depmanager">Dep Manager Board</a>
+      </li>
+
+      <li *ngIf="authority === 'trainer'" class="nav-item">
+        <a class="nav-link" routerLink="trainer">Trainer Board</a>
+      </li>
+
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="trainerlist">Trainers</a>
+      </li>
+
+      <li *ngIf="authority === 'manager'" class="nav-item">
+        <a class="nav-link" routerLink="signup">Add Trainer</a>
+      </li>
+
+      <li *ngIf="authority === 'manager'" class="nav-item">
+        <a class="nav-link" routerLink="create-training-session">Create Session</a>
+      </li>
+
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="trainingSessions">Training Sessions</a>
+      </li>
+
+      <li *ngIf="authority === 'manager'" class="nav-item">
+        <a class="nav-link" routerLink="add-virtual-machines">Add VM</a>
+      </li>
+
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="virtualMachines">Virtual Machines</a>
+      </li>
+      <li *ngIf="authority === 'manager'" class="nav-item">
+        <a class="nav-link" routerLink="leavedetails">Leave Details</a>
+      </li>
+      <li *ngIf="authority === 'trainer'" class="nav-item">
+        <a class="nav-link" routerLink="leavemanagement">Leave Management</a>
+      </li>
+
+      <li *ngIf="!authority" class="nav-item">
+        <a class="nav-link" routerLink="auth/login">Login</a>
+      </li>
+    </ul>
+
+  </div>
+
+
+</nav>
+
+
+
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

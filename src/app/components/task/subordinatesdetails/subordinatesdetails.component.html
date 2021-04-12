@@ -1,0 +1,69 @@
+<h2 style="color: rgb(88, 2, 84);">Training Session List</h2>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- <th>Name</th> -->
+            <th>Session Name</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+            <th>Participants</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let trainingSession of trainingSessions">
+            <!-- <td>{{ trainer.name }}</td> -->
+            <td>{{ trainingSession.sessionName }}</td>
+            <td>{{ trainingSession.startDate }}</td>
+            <td>{{ trainingSession.duration }}</td>
+            <td>{{ trainingSession.maxParticipants }}</td>
+
+
+
+
+        </tr>
+    </tbody>
+</table>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Subordinates Contact Details </h2>
+        <p>Available subordinate trainers</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Trainer Name</th>
+
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trainer of trainers">
+                    <td class="Success">{{ trainer.name }}</td>
+
+                    <td class="Info">{{ trainer.email }}</td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

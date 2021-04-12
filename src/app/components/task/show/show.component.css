@@ -1,0 +1,11 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+mat-form-field{
+    width: 100%;
+}
+
+textarea{
+    height: 120px !important;
+}

@@ -1,0 +1,31 @@
+<h2 style="color: white;">Training Session List</h2>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th>Session Name</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+            <th>Participants</th>
+            <th>IFS Application Version</th>
+            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let trainingSession of trainingSessions">
+            <td>{{ trainingSession.sessionName }}</td>
+            <td>{{ trainingSession.startDate }}</td>
+            <td>{{ trainingSession.duration }}</td>
+            <td>{{ trainingSession.maxParticipants }}</td>
+            <td>{{ trainingSession.ifsApplicationVersion }}</td>
+            
+            <td>
+                <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning" >Update</button>
+                
+                <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                
+                <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

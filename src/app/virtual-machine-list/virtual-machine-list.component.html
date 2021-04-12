@@ -1,0 +1,23 @@
+<h2 >Virtual Machine List</h2>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Version</th>
+            <th>Region</th>
+            <th>Status</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let virtualMachine of virtualMachines">
+            <td>{{ virtualMachine.product }}</td>
+            <td>{{ virtualMachine.version }}</td>
+            <td>{{ virtualMachine.region }}</td>
+            <td>{{ virtualMachine.status }}</td>
+            
+            
+            
+        </tr>
+    </tbody>
+</table>

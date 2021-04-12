@@ -1,0 +1,29 @@
+<h2>Trainer List</h2>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th>Trainer ID</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Title</th>
+            <th>Type</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let trainer of leaves">
+            <td>{{ trainer['trainerId'] }}</td>
+            <td>{{ trainer.date }}</td>
+            <td>{{ trainer.description }}</td>
+            <td>{{ trainer.title }}</td>
+
+            <td>
+                <button class="btn btn-info" style="margin-left: 10px;">{{
+
+                    trainer.type }}</button>
+            </td>
+
+
+        </tr>
+    </tbody>
+</table>
