@@ -1,26 +1,4 @@
-<h2 style>Training Session List</h2>
-
-<form (ngSubmit)="onSubmit()" >
-
-
-    Filter:
-    Date<input type="date"  id="startDate"
-    [(ngModel)]="startDate" name="startDate">
-
-    Delivery Method<input type="text" id="deliveryMethod"
-    [(ngModel)]="deliveryMethod" name="deliveryMethod">
-
-    Ifs Version<input type="text"  id="ifsVersion"
-    [(ngModel)]="ifsVersion" name="ifsVersion">
-
-    <button class="btn btn-dark" type="submit" style="margin-left: 10px;margin-bottom: 5px;" >Filter</button>
-    <button class="btn btn-dark" type="reset" (click)="goBackToPrev()" style="margin-left: 10px;margin-bottom: 5px;">Reset</button>
-
-    
-</form>
-
-
-
+<h2 style="color: white;">Training Session List</h2>
 <table class="table table-hover table-dark">
     <thead>
         <tr>
