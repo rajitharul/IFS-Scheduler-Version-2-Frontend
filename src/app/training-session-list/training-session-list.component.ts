@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { TrainingSession } from '../class/training-session';
 import { TrainingSessionService } from '../services/training-session.service';
-import { SortRequestTrainingSessions } from '../class/sort-request-training-sessions';
-import { FormGroup } from '@angular/forms';
 
 
 interface Info{
@@ -21,19 +19,9 @@ interface Info{
 })
 export class TrainingSessionListComponent implements OnInit {
 
-  filterForm: FormGroup;
-  startDate?: Date;
-  deliveryMethod?: String;
-  ifsVersion?: String;
-
-
-
-  requestBody: SortRequestTrainingSessions;
-  sortedTrainingSessions: SortRequestTrainingSessions = new SortRequestTrainingSessions();
-
 
   info: Info;
-  trainingSessions: any;
+  trainingSessions: TrainingSession[];
 
   constructor(private trainingSessionService:TrainingSessionService,private router:Router , private token: TokenStorageService) { }
 
@@ -53,7 +41,7 @@ export class TrainingSessionListComponent implements OnInit {
 
   private getTrainingSessions(){
     
-    if(this.info.username == 'amila123'){
+    if(this.info.username == 'rajith'){
       this.trainingSessionService.getTrainingSessionList().subscribe(data=>{
         this.trainingSessions = data;
       });
@@ -87,27 +75,5 @@ export class TrainingSessionListComponent implements OnInit {
       this.getTrainingSessions();
     })
   }
-
-  onSubmit() {
-    this.requestBody= {
-      startDate:this.startDate,
-      deliveryMethod:this.deliveryMethod,
-      ifsVersion:this.ifsVersion
-    };
-
-    console.log(this.requestBody);
-    this.trainingSessionService.getSortedTrainingSessions(this.requestBody).subscribe(data => {
-      this.trainingSessions = [];
-      this.trainingSessions = data;
-    })
-
-  }
-
-  goBackToPrev(){
-    console.log("clear");
-    this.getTrainingSessions();
-  }
-
-
 
 }
