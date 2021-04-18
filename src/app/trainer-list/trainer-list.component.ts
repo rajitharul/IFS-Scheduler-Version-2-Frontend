@@ -10,20 +10,20 @@ import { TrainerService } from '../services/trainer.service';
 })
 export class TrainerListComponent implements OnInit {
 
-  trainers: SignupInfo[];
+  trainers:SignupInfo[];
 
-  constructor(private trainerService: TrainerService, private router: Router) { }
+  constructor(private trainerService:TrainerService, private router: Router) { }
 
   ngOnInit(): void {
     this.getTrainers();
   }
-  private getTrainers() {
-    this.trainerService.getUserList().subscribe(data => {
+  private getTrainers(){
+    this.trainerService.getAllTrainerList().subscribe(data=>{
       this.trainers = data;
     });
   }
 
-  trainerDetails(id: number) {
+  trainerDetails(id:number){
     this.router.navigate(['trainer-details', id]);
   }
 

@@ -19,22 +19,26 @@ export class CreateTrainingSessionComponent implements OnInit {
 
   trainingSession: TrainingSession=new TrainingSession();
   virtualMachineIds :number[] = [];
+ // virtualMachineNames :string[] = [];
   trainerIds :number[] = [];
   trainerId :number = 0;
   trainers : Trainer[];
   virtualMachines : VirtualMachine[];
 
+  tempProduct: string;
 
-  
 
-  //to check the filtering function
-  virtualMachinesFilterd :  VirtualMachine[] ;
+
+
 
 
   virtualMachineId :number = 0;
+ // virtualMachineName :string;
+
   constructor(private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) { }
 
   ngOnInit(): void {
+
   }
 
   saveTrainingSession(){
@@ -68,11 +72,21 @@ export class CreateTrainingSessionComponent implements OnInit {
 
   getAvailableVM(){
 
+    this.tempProduct = this.trainingSession.ifsApplicationVersion;
+
+    for (var i = 0; i < this.tempProduct.length; i++) {
+      //this.trainingSession.ifsApplicationVersion.charAt(i))
+      if(this.tempProduct.charAt(i)===" "){
+        this.tempProduct= this.tempProduct.replace(this.tempProduct.charAt(i), "-");
+      }
+
+    }
+    console.log(this.tempProduct);
+
 console.log( this.trainingSession.startDate)
 
-     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate).subscribe(data=>{
+     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct).subscribe(data=>{
       console.log(data);
-      this.virtualMachines = data;
     },
     error => console.error(error));
 
@@ -82,25 +96,25 @@ console.log( this.trainingSession.startDate)
   getAvailableTrainers(){
 
     console.log('getting available Trainers')
-    
+
           let type  = this.trainingSession.type;
 
           this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate ).subscribe(data=>{
             this.trainers = data;
-            
+
             console.log( this.trainers);
           },
           error => console.error(error));
-    
+
       }
-    
-    
+
+
 
 
 
   addTrainer(){
 
-    this.trainerIds.push(this.trainerId);   
+    this.trainerIds.push(this.trainerId);
       console.log("Trainer Id pushed" + this.trainerId);
       console.log("Trainer Ids"  + this.trainerIds);
 
@@ -108,20 +122,16 @@ console.log( this.trainingSession.startDate)
   }
 
 
-  filterByVersion(){
-
-
-  }
 
 
 
   onSubmit(){
+
+    this.trainingSession.ifsApplicationVersion=this.tempProduct;
 
     this.trainingSession.vmIds = this.virtualMachineIds;
     this.trainingSession.trainerids = this.trainerIds;
     console.log(this.trainingSession);
     this.saveTrainingSession();
   }
-
-
 }

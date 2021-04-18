@@ -1,63 +1,126 @@
-<h3 >
-    View Training Session Details
+<h3 style="color:black;">
+  View Training Session Details
 </h3>
+
 <div>
 
-    <div >
-        <label>
-            <b >Session Name :</b>
-        </label>
-        {{trainingSession.sessionName}}
-    </div>
+  <div>
+    <label>
+      <b>Session Name :</b>
+    </label>
+    {{trainingSession.sessionName}}
+  </div>
 
-    <div >
-        <label>
-            <b>Start Date:</b>
-        </label>
-        {{trainingSession.startDate}}
-    </div>
+  <div>
+    <label>
+      <b>Start Date:</b>
+    </label>
+    {{trainingSession.startDate}}
+  </div>
 
-    <div>
-        <label>
-            <b>Duration  :</b>
-        </label>
-        {{trainingSession.duration}}
-    </div>
+  <div>
+    <label>
+      <b>Duration :</b>
+    </label>
+    {{trainingSession.duration}}
+  </div>
 
-    <div >
-        <label>
-            <b>Max Participants :</b>
-        </label>
-        {{trainingSession.maxParticipants}}
-    </div>
+  <div>
+    <label>
+      <b>Max Participants :</b>
+    </label>
+    {{trainingSession.maxParticipants}}
+  </div>
 
-    <div >
-        <label>
-            <b>IFS Application Version :</b>
-        </label>
-        {{trainingSession.ifsApplicationVersion}}
-    </div>
+  <div>
+    <label>
+      <b>IFS Application Version :</b>
+    </label>
+    {{trainingSession.ifsApplicationVersion}}
+  </div>
 
-    <div >
-        <label>
-            <b>Buffer Time:</b>
-        </label>
-        {{trainingSession.bufferTime}}
-    </div>
+  <div>
+    <label>
+      <b>Buffer Time:</b>
+    </label>
+    {{trainingSession.bufferTime}}
+  </div>
 
-    <div >
-        <label>
-            <b>Manager Comment :</b>
-        </label>
-        {{trainingSession.managerComment}}
-    </div>
+  <div>
+    <label>
+      <b>Manager Comment :</b>
+    </label>
+    {{trainingSession.managerComment}}
+  </div>
 
-    <div >
-        <label>
-            <b>Delivery Method :</b>
-        </label>
-        {{trainingSession.deliveryMethod}}
-    </div>
+  <div>
+    <label>
+      <b>Delivery Method :</b>
+    </label>
+    {{trainingSession.deliveryMethod}}
+  </div>
 
-    
+  <div>
+    <label>
+      <b>Latest allocation of Virtual Machines :</b>
+    </label>
+    <tr *ngFor="let tentativeVirtualMachine of tentativeVirtualMachines">
+      <td>{{ tentativeVirtualMachine.virtualMachineName }} : Id - {{tentativeVirtualMachine.virtualMachineId}}</td>
+    </tr>
+  </div>
+
+  <div>
+    <label>
+      <b>Free Virtual Machines :</b>
+    </label>
+    <tr *ngFor="let freeVirtualMachine of freeVirtualMachines">
+      <td>{{ freeVirtualMachine.virtualMachineName }} : Id - {{freeVirtualMachine.virtualMachineId}}</td>
+    </tr>
+  </div>
+
 </div>
+
+
+
+<form (ngSubmit)="getAvailableVM()">
+
+  <div class="form-group">
+    <label style="color: black;">
+      Available VM's
+    </label>
+
+  </div>
+
+  <Br>
+  <button class="btn btn-dark" type="submit">Get Available VM's</button>
+
+</form>
+
+<br>
+
+<form (ngSubmit)="addVm()">
+
+  <div class="form-group">
+    <label style="color: black;">
+      VM ID
+    </label>
+
+    <input type="number" class="form-control" id="vmId" [(ngModel)]="virtualMachineId" name="vmId">
+
+
+
+
+
+
+
+  </div>
+
+
+  <button class="btn btn-dark" type="submit">Add Vm</button>
+
+</form>
+
+
+
+<br>
+<button class="btn btn-success" (click)="allocateVMs()">Update</button>

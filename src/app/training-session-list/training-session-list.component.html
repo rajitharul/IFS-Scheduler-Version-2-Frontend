@@ -1,31 +1,57 @@
-<h2 style="color: white;">Training Session List</h2>
+<h2 style="color: black;">Training Session List</h2>
+
+<form (ngSubmit)="onSubmit()">
+
+
+  Filter:
+  Date<input type="date" id="startDate" [(ngModel)]="startDate" name="startDate">
+
+  Delivery Method<input type="text" id="deliveryMethod" [(ngModel)]="deliveryMethod" name="deliveryMethod">
+
+  Ifs Version<input type="text" id="ifsVersion" [(ngModel)]="ifsVersion" name="ifsVersion">
+
+  <button class="btn btn-dark" type="submit">Filter</button>
+
+</form>
+
+
+
 <table class="table table-hover table-dark">
-    <thead>
-        <tr>
-            <th>Session Name</th>
-            <th>Start Date</th>
-            <th>Duration</th>
-            <th>Participants</th>
-            <th>IFS Application Version</th>
-            
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let trainingSession of trainingSessions">
-            <td>{{ trainingSession.sessionName }}</td>
-            <td>{{ trainingSession.startDate }}</td>
-            <td>{{ trainingSession.duration }}</td>
-            <td>{{ trainingSession.maxParticipants }}</td>
-            <td>{{ trainingSession.ifsApplicationVersion }}</td>
-            
-            <td>
-                <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning" >Update</button>
-                
-                <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-                
-                <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Session Name</th>
+      <th>Start Date</th>
+      <th>Duration</th>
+      <th>IFS Application Version</th>
+      <th>Delivery Method</th>
+      <th>Participants</th>
+
+
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trainingSession of trainingSessions">
+      <td>{{ trainingSession.sessionName }}</td>
+      <td>{{ trainingSession.startDate }}</td>
+      <td>{{ trainingSession.duration }}</td>
+      <td>{{ trainingSession.ifsApplicationVersion }}</td>
+      <td>{{ trainingSession.deliveryMethod }}</td>
+      <td>{{ trainingSession.maxParticipants }}</td>
+
+
+      <td>
+        <button (click)="updateTrainingSession(trainingSession.id)" *ngIf="authority === 'manager'"
+          class="btn btn-warning">Update</button>
+
+
+        <button (click)="deleteTrainingSession(trainingSession.id)" *ngIf="authority === 'manager'"
+          class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+
+        <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info"
+          style="margin-left: 10px;">View</button>
+
+      </td>
+    </tr>
+  </tbody>
 </table>

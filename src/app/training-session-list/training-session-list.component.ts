@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenStorageService } from '../auth/token-storage.service';
 import { TrainingSession } from '../class/training-session';
 import { TrainingSessionService } from '../services/training-session.service';
 
+import { FormGroup } from '@angular/forms';
+import { SortRequestTrainingSessions } from '../class/sort-request-training-sessions';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 interface Info{
   token: string;
   username: string;
   authorities: string[];
 }
+
 
 
 @Component({
@@ -19,14 +22,22 @@ interface Info{
 })
 export class TrainingSessionListComponent implements OnInit {
 
-
   info: Info;
-  trainingSessions: TrainingSession[];
 
-  constructor(private trainingSessionService:TrainingSessionService,private router:Router , private token: TokenStorageService) { }
+  filterForm: FormGroup;
+  startDate?: Date;
+  deliveryMethod?: String;
+  ifsVersion?: String;
+
+  requestBody: SortRequestTrainingSessions;
+  trainingSessions: any;
+  sortedTrainingSessions: SortRequestTrainingSessions = new SortRequestTrainingSessions();
+
+  authority :string;
+
+  constructor(private trainingSessionService: TrainingSessionService, private router: Router, private token: TokenStorageService) { }
 
   ngOnInit(): void {
-
     const token = this.token.getToken();
     const username = this.token.getUsername();
     const authorities = this.token.getAuthorities();
@@ -40,8 +51,18 @@ export class TrainingSessionListComponent implements OnInit {
   }
 
   private getTrainingSessions(){
-    
-    if(this.info.username == 'rajith'){
+
+    let flag:boolean = this.info.authorities.every(role => {
+      if (role['authority'] === 'ROLE_MANAGER') {
+        this.authority ='manager' ;
+        return true ;
+      }
+        return false;
+
+
+    });
+
+    if(flag){
       this.trainingSessionService.getTrainingSessionList().subscribe(data=>{
         this.trainingSessions = data;
       });
@@ -52,8 +73,8 @@ export class TrainingSessionListComponent implements OnInit {
       });
 
     }
-    
- 
+
+
 
 
 
@@ -61,19 +82,34 @@ export class TrainingSessionListComponent implements OnInit {
 
   }
 
-  trainingSessionDetails(id:number){
+  trainingSessionDetails(id: number) {
     this.router.navigate(['training-session-details', id]);
   }
 
-  updateTrainingSession(id:number){
+  updateTrainingSession(id: number) {
     this.router.navigate(['update-training-session', id]);
   }
 
-  deleteTrainingSession(id:number){
-    this.trainingSessionService.deleteTrainingSession(id).subscribe(data=>{
+  deleteTrainingSession(id: number) {
+    this.trainingSessionService.deleteTrainingSession(id).subscribe(data => {
       console.log(data);
       this.getTrainingSessions();
     })
+  }
+
+  onSubmit() {
+    this.requestBody= {
+      startDate:this.startDate,
+      deliveryMethod:this.deliveryMethod,
+      ifsVersion:this.ifsVersion
+    };
+
+    console.log(this.requestBody);
+    this.trainingSessionService.getSortedTrainingSessions(this.requestBody).subscribe(data => {
+      this.trainingSessions = [];
+      this.trainingSessions = data;
+    })
+
   }
 
 }

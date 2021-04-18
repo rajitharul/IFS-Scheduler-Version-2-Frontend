@@ -1,23 +1,56 @@
-<h2 >Virtual Machine List</h2>
+<h2>Virtual Machine List</h2>
+
+<form (ngSubmit)="onSubmit()">
+
+
+  Filter:
+  Product<input type="text" id="product" [(ngModel)]="product" name="product">
+
+  Version<input type="text" id="version" [(ngModel)]="version" name="version">
+
+  Region<input type="text" id="region" [(ngModel)]="region" name="region">
+
+  <button class="btn btn-dark" type="submit">Filter</button>
+
+</form>
+
+
 <table class="table table-hover table-dark">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Version</th>
-            <th>Region</th>
-            <th>Status</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let virtualMachine of virtualMachines">
-            <td>{{ virtualMachine.product }}</td>
-            <td>{{ virtualMachine.version }}</td>
-            <td>{{ virtualMachine.region }}</td>
-            <td>{{ virtualMachine.status }}</td>
-            
-            
-            
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Virtual Machine Name</th>
+      <th>Product</th>
+      <th>Version</th>
+      <th>Region</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let virtualMachine of virtualMachines">
+      <td>{{ virtualMachine.virtualMachineName }}</td>
+      <td>{{ virtualMachine.product }}</td>
+      <td>{{ virtualMachine.version }}</td>
+      <td>{{ virtualMachine.region }}</td>
+
+      <td>
+
+        <button (click)="virtualMachineDetails(virtualMachine.virtualMachineId)" class="btn btn-info"
+          style="margin-left: 10px;">View</button>
+
+        <button (click)="updateVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'"
+          class="btn btn-warning">Update</button>
+
+        <button (click)="deleteVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'"
+          class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+
+
+
+      </td>
+
+
+
+
+    </tr>
+  </tbody>
 </table>

@@ -16,17 +16,17 @@
         </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 Start Date
             </label>
     
             <input type="date" class="form-control" id="startDate"
-            (change)= "getAvailableTrainers() ; getAvailableVM()" [(ngModel)]="trainingSession.startDate" name="startDate">
+                [(ngModel)]="trainingSession.startDate" name="startDate">
     
         </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 Duration
             </label>
     
@@ -36,7 +36,7 @@
         </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 Max Participants
             </label>
     
@@ -46,7 +46,7 @@
         </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 IFS Application Version
             </label>
     
@@ -54,9 +54,9 @@
                 [(ngModel)]="trainingSession.ifsApplicationVersion" name="ifsApplicationVersion">
     
         </div>
-    <!--check-->
+    
         <div class="form-group">
-            <label >
+            <label>
                 Buffer Time
     
             </label>
@@ -67,7 +67,7 @@
         </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 Manager Comment
             </label>
     
@@ -75,20 +75,9 @@
                 [(ngModel)]="trainingSession.managerComment" name="managerComment">
     
         </div>
-
-
-        <div class="form-group">
-            <label >
-                    Training Session Type
-            </label>
-    
-            <input type="text" class="form-control" id="trainingSessionType"
-            (change)= "getAvailableTrainers()" [(ngModel)]="trainingSession.type" name="trainingSessionType">
-    
-        </div>
     
         <div class="form-group">
-            <label >
+            <label>
                 Delivery Method
     
             </label>
@@ -98,113 +87,9 @@
     
         </div>
     
-        <button class="btn btn-dark" type="submit">Create Session</button>
+        <button class="btn btn-dark" type="submit">Update Session</button>
     
     </form>
 
-    <form (ngSubmit) ="getAvailableVM()">
-        
-        <div class="form-group">
-            <label style="color: black;">
-                Available VM's
-            </label>
-        
-        </div>
-
-        <Br>
-        <button class="btn btn-dark" type="submit">Get Available VM's</button>
-
-                    
-        <li *ngFor ="let virtualMachine of virtualMachines" >
-
-        
-            Id is : {{virtualMachine.virtualMachineId}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  
-         
-         
-     </li>
-
-
-    </form>
-
-    <select [(ngModel)]="virtualMachineId">
-        <option [ngValue]="null" [disabled]="true" >VM  Available</option>
-        <option *ngFor="let virtualMachine of virtualMachines" [value]="virtualMachine.virtualMachineId">
-            Id is : {{virtualMachine.virtualMachineId}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  
-        </option>
-    </select>  
-
-
-
-    <form (ngSubmit) ="addVm()">
-        
-        <div class="form-group">
-            <label style="color: black;">
-                VM ID
-            </label>
-    
-            <input type="number" class="form-control" id="vmId"
-                [(ngModel)]="virtualMachineId" name="vmId">
-    
-        </div>
-
-        <Br>
-        <button class="btn btn-dark" type="submit">Add Vm</button>
-
-    </form>
-
-    <form (ngSubmit) ="getAvailableTrainers()">
-        
-        <div class="form-group">
-            <label style="color: black;">
-                Available Trainer's According Type
-            </label>
-        
-        </div>
-
-        <Br>
-        <button class="btn btn-dark" type="submit">Get Available Trainer's</button>
-
-                    
-    <li *ngFor ="let tempTrainer of trainers" >
-
-        
-           Id is : {{tempTrainer.trainerId}}  Name :  {{tempTrainer.name}}  specialities  are {{tempTrainer.qualifications}}  
-        
-        
-    </li>
-    
-
-
-
-    </form>
-
-
-     
-    <select [(ngModel)]="trainerId">
-        <option [ngValue]="null" [disabled]="true" >Trainers Available</option>
-        <option *ngFor="let trainer of trainers" [value]="trainer.trainerId">
-            Id is : {{trainer.trainerId}}  Name :  {{trainer.name}}  specialities  are {{trainer.qualifications}}  
-        </option>
-    </select>   
-
-    <form (ngSubmit) ="addTrainer()">
-        
-        <div class="form-group">
-            <label style="color: black;">
-                Trainer ID
-            </label>
-                </div>
-
-        <Br>
-        <button class="btn btn-dark" type="submit">Add trainer</button>
-
-    </form>
-
-
-
-
-</div>-->
-
-            
-            
+</div>
 

@@ -14,24 +14,15 @@ export class TrainerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getUserList():Observable<SignupInfo[]>{
-    return this.httpClient.get<SignupInfo[]>(`${this.baseURL}`)
+  getAllTrainerList():Observable<SignupInfo[]>{
+    return this.httpClient.get<SignupInfo[]>(`${this.tainerURL}`)
   }
 
   getAvailableTrainerList(type : string , date:Date):Observable<Trainer[]>{
+    console.log(this.httpClient.get<Trainer[]>(`${this.tainerURL}/${type}/${date}`));
     return this.httpClient.get<Trainer[]>(`${this.tainerURL}/${type}/${date}`)
   }
 
-
-  addTrainer(trainer:Trainer):Observable<Object>{
-    return this.httpClient.post(`${this.tainerURL}`, trainer);
-  }
-
-
-
-  getTrainerbyId( trainerId: number):Observable<Trainer>{
-    return this.httpClient.get<Trainer>(`${this.tainerURL}/${trainerId}`)
-  }
 
 
 }

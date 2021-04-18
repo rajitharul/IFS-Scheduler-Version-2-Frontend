@@ -11,6 +11,7 @@ import { VirtualMachineService } from '../services/virtual-machine.service';
 export class AddVirtualMachineComponent implements OnInit {
 
   virtualMachine: VirtualMachine = new VirtualMachine();
+  tempProduct: String;
   constructor(private virtualMachineService:VirtualMachineService, private router:Router) { }
 
 
@@ -18,6 +19,16 @@ export class AddVirtualMachineComponent implements OnInit {
   }
 
   saveVirtualMachine(){
+    this.tempProduct = this.virtualMachine.product;
+    for (var i = 0; i < this.tempProduct.length; i++) {
+      //this.trainingSession.ifsApplicationVersion.charAt(i))
+      if(this.tempProduct.charAt(i)===" "){
+        this.tempProduct= this.tempProduct.replace(this.tempProduct.charAt(i), "-");
+      }
+
+    }
+    this.virtualMachine.product = this.tempProduct;
+    console.log(this.virtualMachine.product);
     this.virtualMachineService.addVirtualMachine(this.virtualMachine).subscribe(data=>{
       console.log(data);
       this.goToVirtualMachineList();

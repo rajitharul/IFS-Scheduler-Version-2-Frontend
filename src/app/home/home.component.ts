@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../auth/token-storage.service';
 
-interface Info {
+interface Info{
   token: string;
   username: string;
   authorities: string[];
@@ -13,7 +13,7 @@ interface Info {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  
   info: Info;
   constructor(private token: TokenStorageService) { }
 

@@ -1,8 +1,9 @@
 <div class="col-md-6 offset-md-3">
 
   <h3>
-    Add Virtual Machine
+    Update Virtual Machine
   </h3>
+
   <form (ngSubmit)="onSubmit()">
 
     <div class="form-group">
@@ -10,8 +11,7 @@
         Virtual Machine Name
       </label>
 
-      <input type="text" class="form-control" id="product" [(ngModel)]="virtualMachine.virtualMachineName"
-        name="product">
+      <input type="text" class="form-control" id="name" [(ngModel)]="virtualMachine.virtualMachineName" name="name">
 
     </div>
 
@@ -46,8 +46,10 @@
 
 
 
-    <button class="btn btn-dark" type="submit">Add Virtual Machine</button>
+    <button class="btn btn-success" type="submit">Update Virtual Machine</button>
 
   </form>
+
+
 
 </div>

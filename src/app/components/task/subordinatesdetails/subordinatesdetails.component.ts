@@ -25,7 +25,7 @@ export class SubordinatesdetailsComponent implements OnInit {
     this.getTrainers();
   }
   private getTrainers() {
-    this.trainerService.getUserList().subscribe(data => {
+    this.trainerService.getAllTrainerList().subscribe(data => {
       this.trainers = data;
       console.log(data);
     });

@@ -18,13 +18,10 @@ const httpOptions ={
 export class AuthService {
 
   private loginUrl = 'http://localhost:8080/api/auth/signin';
-  private signupUrl = 'http://localhost:8080/api/auth/signup';
-
+  private signupUrl = 'http://localhost:8080/api/auth/add-trainer';
   roles: string[];
-  authority :string;
 
-
-  constructor(private tokenStorage: TokenStorageService, private http:HttpClient) {
+  constructor(private http:HttpClient, private tokenStorage: TokenStorageService) {
 
   }
 
@@ -33,6 +30,8 @@ export class AuthService {
   }
 
   signUp(info: SignupInfo): Observable<string> {
+    console.log(info);
+    console.log(info.qualifications);
     return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
 
