@@ -86,6 +86,7 @@ export class CreateTrainingSessionComponent implements OnInit {
 console.log( this.trainingSession.startDate)
 
      this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct).subscribe(data=>{
+      this.virtualMachines = data;
       console.log(data);
     },
     error => console.error(error));
