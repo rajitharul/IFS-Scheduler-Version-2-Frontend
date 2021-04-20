@@ -12,6 +12,19 @@
     margin: 0;
     box-sizing: border-box;
 }
+html{
+    background: url('C:\Users\AG\Downloads\background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+/*body{
+    background-image: url('C:\Users\AG\Downloads\background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}*/
 .cal-events {
     display: none !important;
 }
@@ -20,3 +33,9 @@
     padding-left: 0 !important;
 
 }
+
+/*@media all and (max-width: 1132px) {
+  body{
+      background-image: ;
+  }
+}*/

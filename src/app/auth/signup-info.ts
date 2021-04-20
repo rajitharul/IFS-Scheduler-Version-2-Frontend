@@ -1,9 +1,12 @@
+//import { Notification } from '../class/notification';
+
 export class SignupInfo {
     name: string;
     username: string;
     email: string;
     role: string[];
     password: string;
+    //notifications: Notification[];
     
  
     constructor(name: string, username: string, email: string, password: string) {

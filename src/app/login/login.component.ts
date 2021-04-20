@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { LoginInfo } from '../auth/login-info';
+import { Router } from '@angular/router';
+import { DEFAULT_REDIRECT_KEY } from 'ngx-permissions';
 
 @Component({
   selector: 'app-login',
@@ -10,49 +12,59 @@ import { LoginInfo } from '../auth/login-info';
 })
 export class LoginComponent implements OnInit {
 
-  form:any ={};
+  form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[]=[];
-  private loginInfo:LoginInfo;
+  roles: string[] = [];
+  private loginInfo: LoginInfo;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
-    if(this.tokenStorage.getToken()){
+    if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
     }
 
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.form);
-
-    this.loginInfo = new LoginInfo(this.form.username,this.form.password);
+    this.loginInfo = new LoginInfo(this.form.username, this.form.password);
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
-      data=>{
+      data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
 
-        this.isLoginFailed=false;
-        this.isLoggedIn= true;
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         console.log(this.roles);
-        this.reloadPage();
+        this.router.navigate(['/home']).then(()=>{
+          window.location.reload();
+        });;
       },
-      error=>{
+      error => {
         console.log(error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
       }
     );
+
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   reloadPage() {
-    window.location.reload();
+    window.location.reload(); 
+
+  }
+  gotohome() {
+    this.router.navigate(['/home']);
   }
 }

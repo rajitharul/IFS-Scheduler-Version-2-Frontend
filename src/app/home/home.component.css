@@ -1,7 +1,7 @@
 
 body{
  
-    background-image: url(https://www.drnewitt.com/app/uploads/2017/09/DRNewitt-Blog-1170x550.jpg);
+    background-image: url("background.jpg");
     background-color: hsl(0, 3%, 13%);
     background-size: cover;
     background-repeat: no-repeat;
