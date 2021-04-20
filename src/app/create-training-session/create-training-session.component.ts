@@ -70,7 +70,7 @@ export class CreateTrainingSessionComponent implements OnInit {
 
 console.log( this.trainingSession.startDate)
 
-     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate).subscribe(data=>{
+     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate , this.trainingSession.ifsApplicationVersion , this.trainingSession.duration).subscribe(data=>{
       console.log(data);
       this.virtualMachines = data;
     },
@@ -85,7 +85,7 @@ console.log( this.trainingSession.startDate)
     
           let type  = this.trainingSession.type;
 
-          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate ).subscribe(data=>{
+          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate  , this.trainingSession.duration).subscribe(data=>{
             this.trainers = data;
             
             console.log( this.trainers);
@@ -104,15 +104,28 @@ console.log( this.trainingSession.startDate)
       console.log("Trainer Id pushed" + this.trainerId);
       console.log("Trainer Ids"  + this.trainerIds);
 
+  }
+
+   removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  removeVirtualMachineID(tempId :number ){
+
+    this.removeItemOnce(this.virtualMachineIds , tempId);
 
   }
 
 
-  filterByVersion(){
+  removeTrainer(tempId :number ){
 
+    this.removeItemOnce(this.trainerIds , tempId);
 
   }
-
 
 
   onSubmit(){

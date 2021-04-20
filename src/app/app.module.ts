@@ -34,6 +34,7 @@ import { ShowComponent } from './components/task/show/show.component';
 import { SubordinatesdetailsComponent } from './components/task/subordinatesdetails/subordinatesdetails.component';
 import { LeavemanageComponent } from './leavemanage/leavemanage.component';
 
+
 //calender part
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';

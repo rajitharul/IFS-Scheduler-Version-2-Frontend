@@ -85,7 +85,7 @@ export class UpdateTrainingSessionComponent implements OnInit {
 
 console.log( this.trainingSession.startDate)
 
-     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate).subscribe(data=>{
+     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate , this.trainingSession.ifsApplicationVersion , this.trainingSession.duration).subscribe(data=>{
       console.log(data);
       this.virtualMachines = data;
     },
@@ -100,7 +100,7 @@ console.log( this.trainingSession.startDate)
     
           let type  = this.trainingSession.type;
 
-          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate ).subscribe(data=>{
+          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate , this.trainingSession.duration ).subscribe(data=>{
             this.trainers = data;
             
             console.log( this.trainers);
