@@ -100,7 +100,7 @@ console.log( this.trainingSession.startDate)
     
           let type  = this.trainingSession.type;
 
-          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate ).subscribe(data=>{
+          this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate , this.trainingSession.duration ).subscribe(data=>{
             this.trainers = data;
             
             console.log( this.trainers);
