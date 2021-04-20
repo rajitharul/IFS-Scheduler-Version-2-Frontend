@@ -197,7 +197,8 @@
     <li *ngFor ="let temp of virtualMachineIds" >
     
      VM Id :  {{temp}}
-           
+     <button (click)="removeVirtualMachineID(temp)" >Delete</button>
+
     
     </li>
 
@@ -234,7 +235,7 @@
 
         
            Id is : {{tempTrainer.trainerId}}  Name :  {{tempTrainer.name}}  specialities  are {{tempTrainer.qualifications}}  
-        
+
         
     </li>
     
@@ -271,6 +272,8 @@
     <li *ngFor ="let temp of trainerIds" >
     
      Trainer Id :  {{temp}}
+     <button (click)="removeTrainer(temp)" >Delete</button>
+
     </li>      
     
 

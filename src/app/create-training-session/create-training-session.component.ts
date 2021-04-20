@@ -104,15 +104,28 @@ console.log( this.trainingSession.startDate)
       console.log("Trainer Id pushed" + this.trainerId);
       console.log("Trainer Ids"  + this.trainerIds);
 
+  }
+
+   removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  removeVirtualMachineID(tempId :number ){
+
+    this.removeItemOnce(this.virtualMachineIds , tempId);
 
   }
 
 
-  filterByVersion(){
+  removeTrainer(tempId :number ){
 
+    this.removeItemOnce(this.trainerIds , tempId);
 
   }
-
 
 
   onSubmit(){
