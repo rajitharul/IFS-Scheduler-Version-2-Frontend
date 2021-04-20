@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { Trainer } from '../class/trainer';
 import { TrainingSession } from '../class/training-session';
 import { VirtualMachine } from '../class/virtual-machine';
 import { TrainingSessionService } from '../services/training-session.service';
@@ -25,10 +27,30 @@ export class TrainingSessionDetailsComponent implements OnInit {
   tempvm: VirtualMachine;
 
   tempProduct: string;
+  duration: number;
 
-  constructor(private route:ActivatedRoute, private trainingSessionService: TrainingSessionService, private virtualMachineService: VirtualMachineService, private router:Router) { }
+  roles: string[];
+  authority :string;
+
+  constructor(private tokenStorage: TokenStorageService, private route:ActivatedRoute, private trainingSessionService: TrainingSessionService, private virtualMachineService: VirtualMachineService, private router:Router) { }
 
   ngOnInit(): void {
+
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every(role => {
+        if (role['authority'] === 'ROLE_MANAGER') {
+          this.authority ='manager' ;
+        }else if(role['authority'] === 'ROLE_DEPMANAGER'){
+          this.authority = 'depmanager';
+        }
+        else{
+          this.authority = 'trainer';
+        }
+
+      });
+    }
+
 
     this.id=this.route.snapshot.params['id'];
     //this.start_Date=this.route.snapshot.params['startDate'];
@@ -80,6 +102,7 @@ export class TrainingSessionDetailsComponent implements OnInit {
   getAvailableVM(){
 
     this.tempProduct = this.trainingSession.ifsApplicationVersion;
+    this.duration=this.trainingSession.duration;
 
     for (var i = 0; i < this.tempProduct.length; i++) {
       //this.trainingSession.ifsApplicationVersion.charAt(i))
@@ -93,7 +116,7 @@ export class TrainingSessionDetailsComponent implements OnInit {
 
     console.log( this.trainingSession.startDate)
 
-         this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct).subscribe(data=>{
+         this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct, this.duration).subscribe(data=>{
           this.freeVirtualMachines=data;
 
         },

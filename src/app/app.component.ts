@@ -1,3 +1,5 @@
+import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
 
@@ -11,9 +13,10 @@ export class AppComponent implements OnInit{
   roles: string[];
   authority :string;
 
-  constructor(private tokenStorage: TokenStorageService){}
+  constructor(@Inject(DOCUMENT) private _document, private tokenStorage: TokenStorageService){}
 
-  ngOnInit(){ 
+  ngOnInit(){
+    this._document.body.classList.add('bodybg-color');
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every(role => {
@@ -25,7 +28,7 @@ export class AppComponent implements OnInit{
         else{
           this.authority = 'trainer';
         }
-        
+
       });
     }
   }

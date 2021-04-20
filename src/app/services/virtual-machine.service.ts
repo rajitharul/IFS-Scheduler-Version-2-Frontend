@@ -37,8 +37,8 @@ export class VirtualMachineService {
   }
 
 
-  getAvailableVirtualMachineList(startDate:Date, product: string):Observable<VirtualMachine[]>{
-    return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}/${product}`)
+  getAvailableVirtualMachineList(startDate:Date, product: string, duration: number):Observable<VirtualMachine[]>{
+    return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}/${product}/${duration}`)
   }
 
   getVirtualMachineByTrainingSessions(trainingSessionId: number):Observable<VirtualMachine[]>{

@@ -1,14 +1,23 @@
-<h3 style="color:black;">
-  View Training Session Details
-</h3>
+<div class=" shadow p-3 mb-5 bg-white rounded">
 
-<div>
+  <h1 style="color:black;">
+    <b>View Training Session Details</b>
+  </h1>
 
   <div>
     <label>
       <b>Session Name :</b>
     </label>
     {{trainingSession.sessionName}}
+  </div>
+
+  <div>
+    <label>
+      <b>Trainer / Trainers :</b>
+    </label>
+    <tr *ngFor="let trainer of trainingSession.trainers">
+      <td>{{ trainer.name }} : Id - {{trainer.trainerId}}</td>
+    </tr>
   </div>
 
   <div>
@@ -55,6 +64,13 @@
 
   <div>
     <label>
+      <b>Type :</b>
+    </label>
+    {{trainingSession.type}}
+  </div>
+
+  <div>
+    <label>
       <b>Delivery Method :</b>
     </label>
     {{trainingSession.deliveryMethod}}
@@ -69,7 +85,7 @@
     </tr>
   </div>
 
-  <div>
+  <div *ngIf="authority === 'trainer'">
     <label>
       <b>Free Virtual Machines :</b>
     </label>
@@ -82,7 +98,7 @@
 
 
 
-<form (ngSubmit)="getAvailableVM()">
+<form (ngSubmit)="getAvailableVM()" *ngIf="authority === 'trainer'">
 
   <div class="form-group">
     <label style="color: black;">
@@ -98,7 +114,7 @@
 
 <br>
 
-<form (ngSubmit)="addVm()">
+<form (ngSubmit)="addVm()" *ngIf="authority === 'trainer'">
 
   <div class="form-group">
     <label style="color: black;">
@@ -123,4 +139,4 @@
 
 
 <br>
-<button class="btn btn-success" (click)="allocateVMs()">Update</button>
+<button class="btn btn-success" (click)="allocateVMs()" *ngIf="authority === 'trainer'">Update</button>

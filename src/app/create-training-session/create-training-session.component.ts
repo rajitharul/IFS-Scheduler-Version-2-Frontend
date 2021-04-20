@@ -7,6 +7,9 @@ import {VirtualMachineService} from '../services/virtual-machine.service';
 import {TrainerService} from '../services/trainer.service';
 import { Trainer } from '../class/trainer';
 import { VirtualMachine } from '../class/virtual-machine';
+import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
+import { HostBinding } from '@angular/core';
 
 
 
@@ -26,6 +29,7 @@ export class CreateTrainingSessionComponent implements OnInit {
   virtualMachines : VirtualMachine[];
 
   tempProduct: string;
+  duration: number;
 
 
 
@@ -35,9 +39,13 @@ export class CreateTrainingSessionComponent implements OnInit {
   virtualMachineId :number = 0;
  // virtualMachineName :string;
 
-  constructor(private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) { }
+  constructor( private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) {
+    this.bgColor =  '#fff';}
+  @HostBinding('style.background-color')
+  bgColor;
 
   ngOnInit(): void {
+
 
   }
 
@@ -73,6 +81,7 @@ export class CreateTrainingSessionComponent implements OnInit {
   getAvailableVM(){
 
     this.tempProduct = this.trainingSession.ifsApplicationVersion;
+    this.duration= this.trainingSession.duration;
 
     for (var i = 0; i < this.tempProduct.length; i++) {
       //this.trainingSession.ifsApplicationVersion.charAt(i))
@@ -81,11 +90,12 @@ export class CreateTrainingSessionComponent implements OnInit {
       }
 
     }
+    console.log(this.duration);
     console.log(this.tempProduct);
 
 console.log( this.trainingSession.startDate)
 
-     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct).subscribe(data=>{
+     this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate,this.tempProduct, this.duration).subscribe(data=>{
       this.virtualMachines = data;
       console.log(data);
     },
@@ -123,6 +133,26 @@ console.log( this.trainingSession.startDate)
   }
 
 
+  removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  removeVirtualMachineID(tempId :number ){
+
+    this.removeItemOnce(this.virtualMachineIds , tempId);
+
+  }
+
+
+  removeTrainer(tempId :number ){
+
+    this.removeItemOnce(this.trainerIds , tempId);
+
+  }
 
 
 
