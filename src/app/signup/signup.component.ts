@@ -20,13 +20,22 @@ export class SignupComponent implements OnInit {
   trainer : Trainer = new Trainer();
   trainerQualification : string;
   trainerQualifications : string[] = [];
-  
+  trainerExists : boolean = false;
+
+
+  Existingtrainername : string ;
+
+
+
 
   constructor(private authService: AuthService, private router:Router , private trainerService : TrainerService) { }
 
   ngOnInit(): void {}
 
   onSubmit(){
+
+
+
 
     console.log(this.form);
  
@@ -41,28 +50,51 @@ export class SignupComponent implements OnInit {
       this.trainer.type = this.form.type;
 
 
-        
-      this.trainerService.addTrainer(this.trainer).subscribe(data=>{
+      this.trainerService.getTrainerbyName(this.trainer.name).subscribe(data=>{
+          if(data != null){
+            alert('trainer Exists by the name ' + data.name);
+            this.trainerExists = true;
+                
+          }
         console.log(data);
-        console.log('trainer Added')
-      },
+       
+         },
       error => console.error(error));
 
 
-    this.authService.signUp(this.signupInfo).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+      if(this.trainerExists == true){
+        window.location.reload();
+        return;
+      }else{
 
-    this.router.navigate(['/trainerlist']);
+        this.trainerService.addTrainer(this.trainer).subscribe(data=>{
+          console.log(data);
+          console.log('trainer Added')
+        },
+        error => console.error(error));
+  
+  
+      this.authService.signUp(this.signupInfo).subscribe(
+        data => {
+          console.log(data);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+  
+      this.router.navigate(['/trainerlist']);
+
+      }
+          
+
+
+
+
   }
 
   

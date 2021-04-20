@@ -27,10 +27,10 @@ export class VirtualMachineService {
   }
 
 
-  getAvailableVirtualMachineList(startDate:Date):Observable<VirtualMachine[]>{
+  getAvailableVirtualMachineList(startDate:Date , version:String , duration:number):Observable<VirtualMachine[]>{
 
 
-       return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}`)
+       return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}/${version}/${duration}`)
   
   
       }
