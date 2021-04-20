@@ -166,7 +166,7 @@
     <select [(ngModel)]="virtualMachineId">
         <option [ngValue]="null" [disabled]="true" >VM  Available</option>
         <option *ngFor="let virtualMachine of virtualMachines" [value]="virtualMachine.virtualMachineId">
-            Id is : {{virtualMachine.product}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  
+            Id is : {{virtualMachine.virtualMachineId}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  Name is {{virtualMachine.name}} 
         </option>
     </select>  
 
