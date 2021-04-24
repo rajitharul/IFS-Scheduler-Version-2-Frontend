@@ -104,13 +104,7 @@ export class TrainingSessionDetailsComponent implements OnInit {
     this.tempProduct = this.trainingSession.ifsApplicationVersion;
     this.duration=this.trainingSession.duration;
 
-    for (var i = 0; i < this.tempProduct.length; i++) {
-      //this.trainingSession.ifsApplicationVersion.charAt(i))
-      if(this.tempProduct.charAt(i)===" "){
-        this.tempProduct= this.tempProduct.replace(this.tempProduct.charAt(i), "-");
-      }
 
-    }
     console.log(this.tempProduct);
 
 

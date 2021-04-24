@@ -1,3 +1,11 @@
 .bodybg-color {
   background-color: rgb(155, 35, 35);
 }
+
+.bd-navbar {
+  min-height: 4rem;
+  background-color: #7f53a1;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 5%), inset 0 -1px 0 rgb(0 0 0 / 10%);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}

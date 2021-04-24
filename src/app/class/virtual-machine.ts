@@ -6,6 +6,7 @@ export class VirtualMachine {
     product: String;
     version:String;
     region:String;
-    trainingSessions: TrainingSession[];
+    status: String;
+    trainingSessions: TrainingSession[]=[];
 
 }

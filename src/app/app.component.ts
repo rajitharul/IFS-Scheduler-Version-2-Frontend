@@ -16,7 +16,10 @@ export class AppComponent implements OnInit{
   constructor(@Inject(DOCUMENT) private _document, private tokenStorage: TokenStorageService){}
 
   ngOnInit(){
+
     this._document.body.classList.add('bodybg-color');
+
+
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every(role => {

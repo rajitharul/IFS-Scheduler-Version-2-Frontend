@@ -50,6 +50,8 @@ export class CreateTrainingSessionComponent implements OnInit {
   }
 
   saveTrainingSession(){
+
+
     this.trainingSessionService.createTrainingSession(this.trainingSession).subscribe(data=>{
       console.log(data);
       this.goToTrainingSessionList();
@@ -154,9 +156,20 @@ console.log( this.trainingSession.startDate)
 
   }
 
-
+date: Date;
 
   onSubmit(){
+
+    this.trainingSession.endDate=new Date();
+
+
+     // = this.trainingSession.startDate.getDate();
+     //var temp = this.trainingSession.startDate.getDate();
+
+     this.date = new Date(this.trainingSession.startDate);
+     console.log(this.date.getDate());
+
+    this.trainingSession.endDate.setDate(this.date.getDate() + this.trainingSession.duration);
 
     this.trainingSession.ifsApplicationVersion=this.tempProduct;
 

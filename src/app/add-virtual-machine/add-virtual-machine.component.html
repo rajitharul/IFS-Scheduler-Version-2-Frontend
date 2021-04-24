@@ -1,9 +1,11 @@
-<div class="col-md-6 offset-md-3">
+<br><br>
+<div>
 
-  <h2>
-    <b>Add Virtual Machine</b>
-  </h2>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" class=" shadow p-3 mb-5 bg-white rounded">
+
+    <h2>
+      <b>Add Virtual Machine</b>
+    </h2>
 
     <div class="form-group">
       <label>
@@ -44,9 +46,20 @@
 
     </div>
 
+    <div>
+      <label>
+        Status
+      </label>
+      <select [(ngModel)]="virtualMachine.status" name="status" id="status" class="form-control">
+        <option [ngValue]="null" [disabled]="true">Status</option>
+        <option [value]="status1">working</option>
+        <option [value]="status2">repairing</option>
+      </select>
+    </div>
 
+    <br>
 
-    <button class="btn btn-dark" type="submit">Add Virtual Machine</button>
+    <button class="btn btn-success" type="submit">Add Virtual Machine</button>
 
   </form>
 

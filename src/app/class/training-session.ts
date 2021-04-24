@@ -4,9 +4,10 @@ import { VirtualMachine } from './virtual-machine';
 
 export class TrainingSession {
     id:number;
-    sessionName:String;
+    sessionName:string;
     startDate:Date;
     duration:number;
+    endDate: Date;
     maxParticipants:number;
     ifsApplicationVersion:string;
     bufferTime:number;
@@ -17,5 +18,9 @@ export class TrainingSession {
     trainerids :number[];
     trainers: Trainer[];
     type:string;
+
+  // constructor(){
+  //   this.endDate.setDate(this.startDate.getDate() + this.duration);
+  // }
 
 }

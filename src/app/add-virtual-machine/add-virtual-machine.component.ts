@@ -12,6 +12,8 @@ export class AddVirtualMachineComponent implements OnInit {
 
   virtualMachine: VirtualMachine = new VirtualMachine();
   tempProduct: String;
+  status1: String ="working";
+  status2: String ="repairing";
   constructor(private virtualMachineService:VirtualMachineService, private router:Router) { }
 
 

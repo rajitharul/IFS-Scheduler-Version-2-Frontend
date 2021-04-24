@@ -34,6 +34,9 @@ import { MaterialModule } from './material/material.module';
 import { ShowComponent } from './components/task/show/show.component';
 import { SubordinatesdetailsComponent } from './components/task/subordinatesdetails/subordinatesdetails.component';
 import { LeavemanageComponent } from './leavemanage/leavemanage.component';
+import { jqxSchedulerModule } from 'jqwidgets-ng/jqxscheduler';
+import { jqxButtonModule } from 'jqwidgets-ng/jqxbuttons';
+import { CommonModule } from '@angular/common';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -41,6 +44,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LeaveloginComponent } from './components/leavelogin/leavelogin.component';
 import { UpdateVirtualMachineComponent } from './update-virtual-machine/update-virtual-machine.component';
 import { VirtualMachineDetailsComponent } from './virtual-machine-details/virtual-machine-details.component';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,18 +80,26 @@ import { VirtualMachineDetailsComponent } from './virtual-machine-details/virtua
     UpdateVirtualMachineComponent,
     VirtualMachineDetailsComponent,
 
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModalModule,
     FormsModule,
     ChartsModule,
     ReactiveFormsModule,
     MaterialModule,
     NgxPermissionsModule.forRoot(),
     BrowserAnimationsModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CommonModule,
+    jqxSchedulerModule,
+    jqxButtonModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule
   ],
   exports: [RouterModule, ChartsModule, AppRoutingModule, ReactiveFormsModule,],
   providers: [{provide :HTTP_INTERCEPTORS,useClass : AuthInterceptor, multi :true}, AuthGuard],
