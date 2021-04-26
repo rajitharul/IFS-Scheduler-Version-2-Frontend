@@ -49,58 +49,77 @@
 
 </div>-->
 
-<div class="container" >
-
-  <div *ngIf="isLoggedIn; else loggedOut" >
-    
-  </div>
 
 
-  <ng-template #loggedOut>
+<div class="container inside" style="overflow: hidden;">
 
-    <div class="login-box">
-
-      <h1>LOGIN</h1>
-
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-
-        <div class="textbox">
-
-          <i class="fa fa-user" aria-hidden="true"></i>
-
-          <input type="text" placeholder="Username" name="username" [(ngModel)]="form.username" #username="ngModel"
-            required />
-
-          <div *ngIf="f.submitted && username.invalid" class="login-error">
-            <div *ngIf="username.errors.required">Username is required</div>
-          </div>
-
-        </div>
-
-        <div class="textbox">
-
-          <i class="fa fa-lock" aria-hidden="true"></i>
-
-          <input type="password" placeholder="Password" name="password" [(ngModel)]="form.password" #password="ngModel"
-            required minlength="6" />
-
-          <div *ngIf="f.submitted && password.invalid" class="login-error">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-          </div>
-
-        </div>
-
-        <button class="btn">Login</button>
-        <div *ngIf="f.submitted && isLoginFailed" class="login-error failed">
-          Login failed
-        </div>
-
-      </form>
-
+    <div *ngIf="isLoggedIn; else loggedOut">
 
 
     </div>
-  </ng-template>
+
+
+    <ng-template #loggedOut>
+
+        <div class="login-box">
+
+            <h1>LOGIN</h1>
+
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+                <div class="textbox">
+                    <div class="input-group">
+
+                        <i class="fa fa-user" aria-hidden="true"></i>
+
+                        <input type="text" placeholder="Username" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+
+                    </div>
+
+                    <div *ngIf="f.submitted && username.invalid" class="login-error">
+                        <div *ngIf="username.errors.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Username is required
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="textbox">
+
+                    <div class="input-group">
+
+
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+
+                        <input type="password" placeholder="Password" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+
+                    </div>
+
+                    <div *ngIf="f.submitted && password.invalid" class="login-error">
+
+                        <div *ngIf="password.errors.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Password is required
+                        </div>
+
+                        <div *ngIf="password.errors.minlength">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Minimum 6 charcacters needed
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button class="btn">Login</button>
+                <div *ngIf="f.submitted && isLoginFailed" class="login-error failed">
+
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Login failed
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </ng-template>
 
 </div>

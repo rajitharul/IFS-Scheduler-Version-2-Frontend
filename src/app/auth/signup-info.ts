@@ -6,6 +6,7 @@ export class SignupInfo {
     email: string;
     role: string[];
     password: string;
+    
     //notifications: Notification[];
     
  

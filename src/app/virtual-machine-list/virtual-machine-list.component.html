@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th>Product</th>
+                <th>Name</th>
                 <th>Version</th>
                 <th>Region</th>
                 <th>Status</th>
@@ -14,6 +15,7 @@
         <tbody>
             <tr *ngFor="let virtualMachine of virtualMachines">
                 <td>{{ virtualMachine.product }}</td>
+                <td>{{ virtualMachine.name }}</td>
                 <td>{{ virtualMachine.version }}</td>
                 <td>{{ virtualMachine.region }}</td>
                 <td>{{ virtualMachine.status }}</td>

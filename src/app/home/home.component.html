@@ -1,47 +1,39 @@
-<div class="container">
+<div class="container-fluid">
 
-    <div *ngIf="info.token; else loggedOut" class="row">
-
-
-
-        <h4>
-            Logged in as {{info.username}}
-            <button class="btn btn-secondary" (click)="logout()">Logout</button>
-        </h4>
+    <div class="bg-1">
 
 
 
-    </div>
+
+        <div class="container text-center" *ngIf="info.token; else loggedOut">
+
+            <div class="container text-center home-box">
+
+                <h1>Welcome Back </h1>
+
+                <h2>{{info.username}}</h2>
 
 
-    <ng-template #loggedOut>
-        <h4 class="text-uppercase text-white font-weight-bold">Please login.</h4>
-    </ng-template>
 
-    <div class="container">
-        <div class="row py-4">
-            <!--Grid column-->
-            <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
-                <h4 class="text-uppercase text-white font-weight-bold">IFS a Gartner Peer Insights Customers'
-                    Choice for Enterprise Asset Management Software </h4>
-                <hr class="hr-light">
-                <h6 class="text-white-75 font-weight-light mb-5">IFS has been recognized as a top-rated vendor and
-                    distinguished by our
-                    customers as a Gartner Peer Insights Customers Choice' for Enterprise Asset Management
-                    Software through the Gartner Peer Insights platform.</h6>
+                <br>
+                <button class="btn btn-secondary logout-btn" (click)="logout()">Logout</button>
 
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-6 col-xl-5 mt-xl-5 wow fadeInRight" data-wow-delay="0.3s">
-                <img src="https://calzone.in/images/office-man.png" alt="" class="img-fluid">
             </div>
 
 
-            <!--Grid column-->
+
         </div>
 
+
+        <ng-template #loggedOut>
+            <h2 class="text-uppercase  font-weight-bold">Please login.</h2>
+        </ng-template>
+
+
+
     </div>
+
+
+
 
 </div>

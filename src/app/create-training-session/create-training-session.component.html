@@ -200,6 +200,7 @@
     <li *ngFor ="let temp of virtualMachineIds" >
     
      VM Id :  {{temp}}
+     <button (click) ="removeVirtualMachineID(temp)">Delete</button>
            
     
     </li>
@@ -274,6 +275,7 @@
     <li *ngFor ="let temp of trainerIds" >
     
      Trainer Id :  {{temp}}
+     <button (click) ="removeTrainer(temp)">Delete</button>
     </li>      
     
 
