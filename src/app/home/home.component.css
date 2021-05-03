@@ -1,9 +1,39 @@
-:host {             
+h1,
+h2 {
+    text-align: center;
+    color: #7f53a1;
+}
+
+.container-fluid {
+    margin-top: 200px;
+}
+
+.home-box {
+    background-color: white;
+    border: 1px solid #7f53a1;
+    box-shadow: 0px 5px 15px #888888;
+    width: 40%;
+    padding-bottom: 5%;
+    padding-top: 3%;
+}
+
+.logout-btn {
+    border: 2px solid #7f53a1;
+    color: #7f53a1;
+    background-color: white;
+}
+
+.logout-btn:hover {
+    color: white;
+    background-color: #7f53a1;
+
+}
+
+    :host {             
 
     display: block;
 
     left: 250px ;
     width: 125%;     
     height: 150%;  
-
-}
+    }

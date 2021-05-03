@@ -1,11 +1,10 @@
-<html>
+<!--<div class="container">
 
-<body>
-  <div class="center">
-    <div *ngIf="isLoggedIn; else loggedOut">
-      Logged in as {{roles}}.
-    </div>
+  <div *ngIf="isLoggedIn; else loggedOut">
+    <h5>You have been successfully logged in</h5>
+  </div>
 
+  <div class="container">
     <ng-template #loggedOut>
       <div class="row col-sm-10" style="max-width:500px;">
 
@@ -33,27 +32,94 @@
           <div class="form-group">
             <button class="btn btn-primary">Login</button>
             <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-              Login failed: {{errorMessage}}
+              Login failed
             </div>
           </div>
 
         </form>
 
-        <footer class="page-footer font-small special-color-dark pt-4">
 
-          <!-- Copyright -->
-          <div class="footer-copyright text-center py-3"><b>© 2020 Copyright:</b>
-            <a href="https://www.ifs.com/corp/company/"> IFSCooperation.com</a>
-          </div>
-          <!-- Copyright -->
-
-        </footer>
 
 
       </div>
     </ng-template>
   </div>
-</body>
 
-</html>
-<app-footer></app-footer>
+
+
+</div>-->
+
+
+
+<div class="container inside" style="overflow: hidden;">
+
+  <div *ngIf="isLoggedIn; else loggedOut">
+
+
+  </div>
+
+
+  <ng-template #loggedOut>
+
+      <div class="login-box">
+
+          <h1>LOGIN</h1>
+
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+              <div class="textbox">
+                  <div class="input-group">
+
+                      <i class="fa fa-user" aria-hidden="true"></i>
+
+                      <input type="text" placeholder="Username" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+
+                  </div>
+
+                  <div *ngIf="f.submitted && username.invalid" class="login-error">
+                      <div *ngIf="username.errors.required">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Username is required
+                      </div>
+                  </div>
+
+              </div>
+
+              <div class="textbox">
+
+                  <div class="input-group">
+
+
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+
+                      <input type="password" placeholder="Password" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+
+                  </div>
+
+                  <div *ngIf="f.submitted && password.invalid" class="login-error">
+
+                      <div *ngIf="password.errors.required">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Password is required
+                      </div>
+
+                      <div *ngIf="password.errors.minlength">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Minimum 6 charcacters needed
+                      </div>
+
+                  </div>
+
+              </div>
+
+              <button class="btn">Login</button>
+              <div *ngIf="f.submitted && isLoginFailed" class="login-error failed">
+
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Login failed
+              </div>
+
+          </form>
+
+
+
+      </div>
+  </ng-template>
+
+</div>

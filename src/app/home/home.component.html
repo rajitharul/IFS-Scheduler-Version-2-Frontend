@@ -1,52 +1,39 @@
+<div class="container-fluid">
+
+  <div class="bg-1">
 
 
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-  .bg-1 { 
-    background-color: #d095d8;
-    color: #000000;
-  } 
-  </style> 
-
-</head>
-<body>
 
 
-<div class = "container-fluid">
-    <div class="bg-1">
-        <div class="container text-center">
-          <h1>Welcome Back </h1>
-          <img src="./assets/rajith.jpg" class="img-circle" alt="rajith" width="350" height="350">
-          <h3>Your Information</h3>
-        </div>
+      <div class="container text-center" *ngIf="info.token; else loggedOut">
 
-        <div  class="container text-center" *ngIf="info.token; else loggedOut">
+          <div class="container text-center home-box">
 
-            <h4 >Username:</h4>
-            <h4 >{{info.username}}</h4>
+              <h1>Welcome Back </h1>
 
-            <strong>Token:</strong>{{info.token}}
-
-            <br>
-            <button class="btn btn-secondary" (click)="logout()">Logout</button>
-        </div>
+              <h2>{{info.username}}</h2>
 
 
-        <ng-template #loggedOut>
-            <h4 class="text-uppercase text-white font-weight-bold">Please login.</h4>
-        </ng-template>
+
+              <br>
+              <button class="btn btn-secondary logout-btn" (click)="logout()">Logout</button>
+
+          </div>
+
+
 
       </div>
-    </div>
-</body>
 
 
-</html>
-<app-footer></app-footer>
+      <ng-template #loggedOut>
+          <h2 class="text-uppercase  font-weight-bold">Please login.</h2>
+      </ng-template>
+
+
+
+  </div>
+
+
+
+
+</div>
