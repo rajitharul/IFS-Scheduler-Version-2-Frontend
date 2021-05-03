@@ -101,9 +101,6 @@
 
 
 
-
-
-
     
         <div class="form-group">
             <label >
@@ -116,13 +113,39 @@
     
         </div>
     
-        <button class="btn btn-success btn-lg btn-block" type="submit">Create Session</button>
     
     </form>
 
 
 
 
+
+    <h6>Location Allocation </h6>
+
+    <select [(ngModel)]="trainingSession.location">
+        <option *ngFor="let location of availablelocations" [ngValue]="location">
+            Location is : {{location.locationName}}
+          </option>
+    </select>   
+
+    <h6>Training Cordinator Allocation </h6>
+
+    <select [(ngModel)]="trainingSession.trainingCordinator">
+        <option [ngValue]="null" [disabled]="true" >trainingCordinators</option>
+        <option *ngFor="let trainingCordinator of availabletrainingCordinators" [ngValue]="trainingCordinator">
+            trainingCordinator is : {{trainingCordinator.name}}
+          </option>
+    </select>   
+
+
+    <h6>Training Room Allocation Select the room with appropriate Capacity </h6>
+
+    <select [(ngModel)]="trainingSession.trainingRoom">
+        <option [ngValue]="null" [disabled]="true" >trainingRooms</option>
+        <option *ngFor="let trainingRoom of availabletrainingRooms" [ngValue]="trainingRoom">
+            trainingRoom Capacity is : {{trainingRoom.capacity}}
+          </option>
+    </select>   
 
 
 
@@ -187,7 +210,7 @@
         <Br>
 
            
-        <button mat-button type="submit">Add Vm</button>
+        <button class="btn btn-primary">Add Vm</button>
 
     </form>
 
@@ -279,8 +302,15 @@
 
 
 
+    <button class="btn btn-success btn-lg btn-block" (click)="onSubmit()">Create Session</button>
 
 
-   
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+
             
 

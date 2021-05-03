@@ -3,10 +3,13 @@ import { Router } from '@angular/router';
 import { TrainingSession } from '../class/training-session';
 import { TrainingSessionService } from '../services/training-session.service';
 import {VirtualMachineService} from '../services/virtual-machine.service';
+import {GeneralService} from '../services/general.service';
 
 import {TrainerService} from '../services/trainer.service';
 import { Trainer } from '../class/trainer';
 import { VirtualMachine } from '../class/virtual-machine';
+import { TrainingCordinator } from '../class/training-cordinator';
+import { TrainingRoom } from '../class/training-room';
 
 
 
@@ -23,18 +26,37 @@ export class CreateTrainingSessionComponent implements OnInit {
   trainerId :number = 0;
   trainers : Trainer[];
   virtualMachines : VirtualMachine[];
-
+  availablelocations : Location[];
+  availabletrainingCordinators : TrainingCordinator[];
+  availabletrainingRooms  : TrainingRoom[];
 
   
-
   //to check the filtering function
   virtualMachinesFilterd :  VirtualMachine[] ;
 
 
   virtualMachineId :number = 0;
-  constructor(private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) { }
+  constructor(private generalService:GeneralService ,private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) { }
 
   ngOnInit(): void {
+
+
+    this.generalService.getAlllocations().subscribe(data=>{
+      this.availablelocations = data;
+    },
+    error => console.error(error));
+
+    this.generalService.getAlltrainerCordinators().subscribe(data=>{
+      this.availabletrainingCordinators = data;
+    },
+    error => console.error(error));
+
+    this.generalService.trainingRooms().subscribe(data=>{
+      this.availabletrainingRooms = data;
+    },
+    error => console.error(error));
+
+
   }
 
   saveTrainingSession(){
@@ -130,6 +152,7 @@ console.log( this.trainingSession.startDate)
 
   onSubmit(){
 
+     
     this.trainingSession.vmIds = this.virtualMachineIds;
     this.trainingSession.trainerids = this.trainerIds;
     console.log(this.trainingSession);
