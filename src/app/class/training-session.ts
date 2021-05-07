@@ -6,7 +6,7 @@ import { TrainingCordinator } from './training-cordinator';
 
 export class TrainingSession {
     id:number;
-    sessionName:String;
+    sessionName:string;
     startDate:Date;
     duration:number;
     maxParticipants:number;

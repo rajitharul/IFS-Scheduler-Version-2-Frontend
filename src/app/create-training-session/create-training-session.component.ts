@@ -7,9 +7,16 @@ import {GeneralService} from '../services/general.service';
 
 import {TrainerService} from '../services/trainer.service';
 import { Trainer } from '../class/trainer';
+
+import { CalEvents } from '../class/cal-events';
+
+
 import { VirtualMachine } from '../class/virtual-machine';
 import { TrainingCordinator } from '../class/training-cordinator';
 import { TrainingRoom } from '../class/training-room';
+
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { startOfDay } from 'date-fns/esm';
 
 
 
@@ -30,7 +37,15 @@ export class CreateTrainingSessionComponent implements OnInit {
   availabletrainingCordinators : TrainingCordinator[];
   availabletrainingRooms  : TrainingRoom[];
 
-  
+  viewDate: Date = new Date();
+  view: CalendarView = CalendarView.Month;
+  CalendarView = CalendarView;
+  // for calender view All Training Sessions
+  allTrainingSessions : TrainingSession[];
+
+
+  calEvent : CalendarEvent;
+
   //to check the filtering function
   virtualMachinesFilterd :  VirtualMachine[] ;
 
@@ -41,18 +56,30 @@ export class CreateTrainingSessionComponent implements OnInit {
   ngOnInit(): void {
 
 
+    this.trainingSessionService.getTrainingSessionList().subscribe(data=>{
+      this.allTrainingSessions = data;
+      console.log(data);
+    },
+    error => console.error(error));
+  
+        
     this.generalService.getAlllocations().subscribe(data=>{
       this.availablelocations = data;
+      console.log(data);
     },
     error => console.error(error));
 
     this.generalService.getAlltrainerCordinators().subscribe(data=>{
       this.availabletrainingCordinators = data;
+      console.log(data);
+
     },
     error => console.error(error));
 
     this.generalService.trainingRooms().subscribe(data=>{
       this.availabletrainingRooms = data;
+      console.log(data);
+
     },
     error => console.error(error));
 
@@ -158,6 +185,58 @@ console.log( this.trainingSession.startDate)
     console.log(this.trainingSession);
     this.saveTrainingSession();
   }
+
+
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  events: CalendarEvent[] = [
+    {
+      start: startOfDay(new Date()),
+      title: 'Training event',
+    },
+    {
+      start: startOfDay(new Date()),
+      title: 'Meeting',
+    },
+    
+  ]
+
+
+
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(date);
+    // let x = this.adminService.dateFormat(date)
+    // this.openAppointmentList(x)
+  }
+
+
+
+  addEvent(temptrainingSession : TrainingSession): void {
+    
+      
+    this.events = [
+      ...this.events,
+      {
+        title: temptrainingSession.sessionName ,
+        start: startOfDay(new Date(temptrainingSession.startDate)),
+        },
+    ];
+  }
+
+
+loadTrainingSession(){
+
+  for(let i = 0 ; i < this.allTrainingSessions.length ; i++ ){
+    console.log('adding Training Session');
+    this.addEvent(this.allTrainingSessions[i]);
+    
+  }
+
+}
+
 
 
 }
