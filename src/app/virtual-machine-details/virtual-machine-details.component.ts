@@ -10,12 +10,7 @@ import { VirtualMachine } from '../class/virtual-machine';
 import { TrainingSessionService } from '../services/training-session.service';
 import { VirtualMachineService } from '../services/virtual-machine.service';
 
-import {
 
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
 import {
   startOfDay,
   endOfDay,
@@ -25,7 +20,16 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
-} from 'date-fns';
+} from 'date-fns/esm';
+
+
+import {
+
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+} from '@angular/core';
+
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -61,7 +65,8 @@ const colors: any = {
 })
 export class VirtualMachineDetailsComponent implements OnInit {
 
-   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+ //  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
 
 
@@ -72,12 +77,18 @@ export class VirtualMachineDetailsComponent implements OnInit {
 
   viewDate: Date = new Date();
 
+ // trainingSessions : TrainingSession[];
+
+  calEvent : CalendarEvent;
+
   modalData: {
     action: string;
-    event: Event;
+    event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
+  private modal: NgbModal
+
+  /*actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
@@ -93,29 +104,29 @@ export class VirtualMachineDetailsComponent implements OnInit {
         this.handleEvent('Deleted', event);
       },
     },
-  ];
+  ];*/
 
+  //refresh: Subject<any> = new Subject();
   refresh: Subject<any> = new Subject();
 
 
-
-  activeDayIsOpen: boolean = true;
+  //activeDayIsOpen: boolean = true;
 
 
 
 
   id:number;
   virtualMachine: VirtualMachine = new VirtualMachine();
-  trainingSessions: TrainingSession[]=[];
+  trainingSessions: TrainingSession[];
 
-  events: Event[]=[];
-
-
-  temp: Event = new Event();
+ // events: Event[]=[];
 
 
+ // temp: Event = new Event();
 
-  constructor(private modal: NgbModal, private route:ActivatedRoute, private trainingSessionService: TrainingSessionService, private virtualMachineService: VirtualMachineService, private router:Router) {
+
+
+  constructor( private route:ActivatedRoute, private trainingSessionService: TrainingSessionService, private virtualMachineService: VirtualMachineService, private router:Router) {
     this.events = new Array();
    }
 
@@ -129,6 +140,8 @@ export class VirtualMachineDetailsComponent implements OnInit {
     this.virtualMachineService.getVirtualMachinebyId(this.id).subscribe( data=>{
       this.virtualMachine= data;
       console.log(this.virtualMachine.trainingSessions);
+      this.trainingSessions=this.virtualMachine.trainingSessions;
+
     });
 
 
@@ -140,6 +153,67 @@ export class VirtualMachineDetailsComponent implements OnInit {
 
   }
 
+  activeDayIsOpen: boolean = true;
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  events: CalendarEvent[] = [
+    {
+      start: startOfDay(new Date()),
+      title: 'Training event',
+    },
+    {
+      start: startOfDay(new Date()),
+      title: 'Meeting',
+    },
+
+  ]
+
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(date);
+    // let x = this.adminService.dateFormat(date)
+    // this.openAppointmentList(x)
+
+    console.log('Day is clicked')
+
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
+  }
+
+  addEvent(temptrainingSession : TrainingSession): void {
+
+
+    this.events = [
+      ...this.events,
+      {
+        title: temptrainingSession.sessionName ,
+        start: startOfDay(new Date(temptrainingSession.startDate)),
+        },
+    ];
+  }
+
+  /*loadTrainingSession(){
+
+    for(let i = 0 ; i < this.trainingSessions.length ; i++ ){
+      console.log('adding Training Session');
+      this.addEvent(this.trainingSessions[i]);
+
+    }
+
+  }*/
+
+
   showEvents(){
 
    // var tempEvents: CalendarEvent[]=new Array(this.virtualMachine.trainingSessions.length);
@@ -147,6 +221,11 @@ export class VirtualMachineDetailsComponent implements OnInit {
 
 
 
+   for(let i = 0 ; i < this.trainingSessions.length ; i++ ){
+    console.log('adding Training Session');
+    this.addEvent(this.trainingSessions[i]);
+
+  }
 
 
 
@@ -172,7 +251,7 @@ export class VirtualMachineDetailsComponent implements OnInit {
     console.log(this.events);
     console.log(this.events.length);*/
 
-   this.events = [
+   /*this.events = [
       {
         start: subDays(startOfDay(new Date()), 1),
         end: addDays(new Date(), 1),
@@ -211,23 +290,15 @@ export class VirtualMachineDetailsComponent implements OnInit {
         },
         draggable: true,
       },
-    ];
+    ];*/
 
   }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
+  handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
   }
+
 
   eventTimesChanged({
     event,
@@ -247,16 +318,6 @@ export class VirtualMachineDetailsComponent implements OnInit {
     this.handleEvent('Dropped or resized', event);
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
 
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }
 
 }
