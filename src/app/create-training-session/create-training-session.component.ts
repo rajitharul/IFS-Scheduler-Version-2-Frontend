@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,   
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef, } from '@angular/core';
 import { Router } from '@angular/router';
 import { TrainingSession } from '../class/training-session';
 import { TrainingSessionService } from '../services/training-session.service';
@@ -7,16 +10,29 @@ import {GeneralService} from '../services/general.service';
 
 import {TrainerService} from '../services/trainer.service';
 import { Trainer } from '../class/trainer';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CalEvents } from '../class/cal-events';
-
 
 import { VirtualMachine } from '../class/virtual-machine';
 import { TrainingCordinator } from '../class/training-cordinator';
 import { TrainingRoom } from '../class/training-room';
 
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { startOfDay } from 'date-fns/esm';
+import {   CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView, } from 'angular-calendar';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+} from 'date-fns/esm';
+import { Subject } from 'rxjs';
 
 
 
@@ -26,6 +42,9 @@ import { startOfDay } from 'date-fns/esm';
   styleUrls: ['./create-training-session.component.css']
 })
 export class CreateTrainingSessionComponent implements OnInit {
+
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
 
   trainingSession: TrainingSession=new TrainingSession();
   virtualMachineIds :number[] = [];
@@ -45,13 +64,21 @@ export class CreateTrainingSessionComponent implements OnInit {
 
 
   calEvent : CalendarEvent;
+  refresh: Subject<any> = new Subject();
 
   //to check the filtering function
   virtualMachinesFilterd :  VirtualMachine[] ;
 
 
   virtualMachineId :number = 0;
-  constructor(private generalService:GeneralService ,private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService) { }
+
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  };  
+  
+  private modal: NgbModal
+  constructor( private generalService:GeneralService ,private trainingSessionService:TrainingSessionService, private router:Router ,  private virtualMachineService:VirtualMachineService , private trainerService:TrainerService ,  ) { }
 
   ngOnInit(): void {
 
@@ -204,12 +231,24 @@ console.log( this.trainingSession.startDate)
     
   ]
 
+  activeDayIsOpen: boolean = true;
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console.log(date);
-    // let x = this.adminService.dateFormat(date)
-    // this.openAppointmentList(x)
+   
+    console.log('Day is clicked')
+   
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
 
 
@@ -235,6 +274,30 @@ loadTrainingSession(){
     
   }
 
+}
+
+handleEvent(action: string, event: CalendarEvent): void {
+  this.modalData = { event, action };
+  this.modal.open(this.modalContent, { size: 'lg' });
+}
+
+
+eventTimesChanged({
+  event,
+  newStart,
+  newEnd,
+}: CalendarEventTimesChangedEvent): void {
+  this.events = this.events.map((iEvent) => {
+    if (iEvent === event) {
+      return {
+        ...event,
+        start: newStart,
+        end: newEnd,
+      };
+    }
+    return iEvent;
+  });
+  this.handleEvent('Dropped or resized', event);
 }
 
 

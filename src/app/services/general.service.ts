@@ -24,14 +24,29 @@ export class GeneralService {
       return this.httpClient.get<TrainingCordinator[]>(`${this.baseURLtrainerCordinators}`)
   }
 
+  addtrainerCordinators(trainerCordinators:TrainingCordinator):Observable<Object>{
+    return this.httpClient.post(`${this.baseURLtrainerCordinators}`, TrainingCordinator);
+  }
+
+
   getAlllocations(): Observable<Location[]> {
     return this.httpClient.get<Location[]>(`${this.baseURLlocations}`)
 }
 
 
+addLocation(location :Location):Observable<Object>{
+  return this.httpClient.post(`${this.baseURLlocations}`, location);
+}
+
 trainingRooms(): Observable<TrainingRoom[]> {
   return this.httpClient.get<TrainingRoom[]>(`${this.baseURLtrainingRooms}`)
 }
+
+
+addTrainingRoom(trainingRoom :TrainingRoom):Observable<Object>{
+  return this.httpClient.post(`${this.baseURLtrainingRooms}`, trainingRoom);
+}
+
 
 
 }

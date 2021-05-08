@@ -303,7 +303,7 @@
 
 
     <button class="btn btn-success btn-lg btn-block" (click)="onSubmit()">Create Session</button>
-    <button class="btn btn-success btn-lg btn-block" (click)="loadTrainingSession()">Load Trainign Sessions </button>
+    <button class="btn btn-success btn-lg btn-block" (click)="loadTrainingSession()">Load Training Sessions on Calender </button>
 
 
    <br>
@@ -356,8 +356,12 @@
 
 <div [ngSwitch]="view">
 
-    <mwl-calendar-month-view (dayClicked)="dayClicked($event.day)" *ngSwitchCase="CalendarView.Month"
-        [viewDate]="viewDate" [events]="events">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
