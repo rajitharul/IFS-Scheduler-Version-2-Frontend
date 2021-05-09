@@ -29,10 +29,10 @@ export class AddVirtualMachineComponent implements OnInit {
     this.checkoutFormGroup = this.formBuilder.group({
       vm: this.formBuilder.group({
         virtualMachineName:new FormControl('', [Validators.required, Validators.minLength(2)]),
-        product:new FormControl('', [Validators.required, Validators.minLength(2)]),
-        version: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        region: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        status: new FormControl('', [Validators.required, Validators.minLength(2)])
+        product:new FormControl('', [Validators.required /*Validators.minLength(2)]*/]),
+        version: new FormControl('', [Validators.required]),
+        region: new FormControl('', [Validators.required]),
+        status: new FormControl('', [Validators.required])
       })});
 
 
@@ -68,10 +68,17 @@ export class AddVirtualMachineComponent implements OnInit {
 
     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched();
+
     }
 
-    console.log(this.virtualMachine);
-    this.saveVirtualMachine();
+    if(this.checkoutFormGroup.valid) {
+      /* write your code here */
+      this.saveVirtualMachine();
+      console.log(this.virtualMachine);
+    }
+
+  //  console.log(this.virtualMachine);
+    // this.saveVirtualMachine();
 
 
   }

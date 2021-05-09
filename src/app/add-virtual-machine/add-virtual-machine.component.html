@@ -2,7 +2,7 @@
 <div>
 
   <!--<form (ngSubmit)="onSubmit()" class=" shadow p-3 mb-5 bg-white rounded">-->
-  <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()" class=" shadow p-3 mb-5 bg-white rounded">
     <div formGroupName="vm" class="form-area">
       <h2>
         <b>Add Virtual Machine</b>
@@ -47,7 +47,7 @@
                 Product is required.
               </div>
               <div *ngIf="product.errors.minlength">
-                Virtual Machine Name must be atleast 2 characters long.
+                Product must be atleast 2 characters long.
               </div>
             </div>
           </div>
