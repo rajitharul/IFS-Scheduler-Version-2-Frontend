@@ -59,6 +59,7 @@ export class CreateTrainingSessionComponent implements OnInit {
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
+  date: Date;
   // for calender view All Training Sessions
   allTrainingSessions : TrainingSession[];
 
@@ -255,14 +256,17 @@ console.log( this.trainingSession.startDate)
 
   addEvent(temptrainingSession : TrainingSession): void {
     
-      
+    //add a for loop and add the duration function as well.
+
+
     this.events = [
       ...this.events,
       {
-        title: temptrainingSession.sessionName ,
+        title: temptrainingSession.sessionName  + ' Duration ' + temptrainingSession.duration,
         start: startOfDay(new Date(temptrainingSession.startDate)),
-        },
+      },
     ];
+  
   }
 
 

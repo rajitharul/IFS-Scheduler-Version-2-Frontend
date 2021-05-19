@@ -1,8 +1,3 @@
-<button mat-button color="primary">Mat Button</button>
-
-
-
-
 
     <h1>
         Create Training Session
@@ -186,6 +181,15 @@
 
     </form>
 
+    <br>
+    <br>
+
+    <button class="btn btn-primary" (click)="getAvailableVM()" >Get Available VirtualMachines</button>
+    <br>
+    <br>
+
+
+
     <select [(ngModel)]="virtualMachineId">
         <option [ngValue]="null" [disabled]="true" >VM  Available</option>
         <option *ngFor="let virtualMachine of virtualMachines" [value]="virtualMachine.virtualMachineId">
@@ -266,6 +270,14 @@
 
 
     </form>
+    
+    <br>
+    <br>
+
+    <button class="btn btn-primary" (click)="getAvailableTrainers()" >Get Available Trainers</button>
+    <br>
+    <br>
+
 
 
      
