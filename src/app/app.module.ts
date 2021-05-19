@@ -33,12 +33,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShowComponent } from './components/task/show/show.component';
 import { SubordinatesdetailsComponent } from './components/task/subordinatesdetails/subordinatesdetails.component';
 import { LeavemanageComponent } from './leavemanage/leavemanage.component';
-
+import { AddTrainingCordinatorComponent } from './add-training-cordinator/add-training-cordinator.component';
 //calender part
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FooterComponent } from './footer/footer.component';
 import { LeaveloginComponent } from './components/leavelogin/leavelogin.component';
+import { AddTrainingLocationComponent } from './add-training-location/add-training-location.component';
+import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +69,9 @@ import { LeaveloginComponent } from './components/leavelogin/leavelogin.componen
     LeavemanageComponent,
     FooterComponent,
     LeaveloginComponent,
+    AddTrainingCordinatorComponent,
+    AddTrainingLocationComponent,
+    AddTrainingRoomComponent,
 
 
   ],
