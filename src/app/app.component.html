@@ -1,49 +1,40 @@
-<nav class="navbar navbar-expand-lg bd-navbar">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+<!--<nav class="navbar navbar-expand-lg bd-navbar" >
   <a class="navbar-brand" href="#">IFS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" routerLink="home">Home</a>
       </li>
-
       <li *ngIf="authority === 'manager'" class="nav-item">
         <a class="nav-link" routerLink="manager">Manager Board</a>
       </li>
-
       <li *ngIf="authority === 'depmanager'" class="nav-item">
         <a class="nav-link" routerLink="depmanager">Dep Manager Board</a>
       </li>
-
       <li *ngIf="authority === 'trainer'" class="nav-item">
         <a class="nav-link" routerLink="trainer">Trainer Board</a>
       </li>
-
       <li *ngIf="authority" class="nav-item">
         <a class="nav-link" routerLink="trainerlist">Trainers</a>
       </li>
-
       <li *ngIf="authority === 'manager'" class="nav-item">
         <a class="nav-link" routerLink="signup">Add Trainer</a>
       </li>
-
       <li *ngIf="authority === 'manager'" class="nav-item">
         <a class="nav-link" routerLink="create-training-session">Create Session</a>
       </li>
-
       <li *ngIf="authority" class="nav-item">
         <a class="nav-link" routerLink="trainingSessions">Training Sessions</a>
       </li>
-
       <li *ngIf="authority === 'manager'" class="nav-item">
         <a class="nav-link" routerLink="add-virtual-machines">Add VM</a>
       </li>
-
       <li *ngIf="authority" class="nav-item">
         <a class="nav-link" routerLink="virtualMachines">Virtual Machines</a>
       </li>
@@ -53,21 +44,157 @@
       <li *ngIf="authority === 'trainer'" class="nav-item">
         <a class="nav-link" routerLink="leavemanagement">Leave Management</a>
       </li>
-
       <li *ngIf="!authority" class="nav-item">
         <a class="nav-link" routerLink="auth/login">Login</a>
       </li>
     </ul>
-
   </div>
+</nav>
+class="navbar navbar-inverse navbar-fixed-top"
+-->
 
 
+
+<nav>
+    <div class="logo">
+
+
+        IFS Trainer Scheduler
+    </div>
+    <label for="btn" class="icon">
+    <span class="fa fa-bars"></span>
+  </label>
+
+    <input type="checkbox" id="btn">
+    <ul>
+        <li *ngIf="authority">
+            <a routerLink="home">Home</a>
+        </li>
+
+
+        <li *ngIf="authority">
+            <label for="btn-1" class="lbl">Trainers +</label>
+
+            <a href="">Trainers</a>
+            <input type="checkbox" id="btn-1">
+
+            <ul>
+
+                <li *ngIf="authority === 'manager'">
+                    <a routerLink="signup">Add Trainer</a>
+                </li>
+                <li *ngIf="authority">
+                    <a routerLink="trainerlist">Trainer List</a>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <li *ngIf="authority">
+            <label for="btn-2" class="lbl">Session +</label>
+
+            <a href="">Sessions</a>
+            <input type="checkbox" id="btn-2">
+
+            <ul>
+                <li *ngIf="authority === 'manager'">
+                    <a routerLink="create-training-session">Create Session</a>
+                </li>
+                <li *ngIf="authority">
+                    <a routerLink="trainingSessions">Session List</a>
+                </li>
+                <!--<li>
+          <label for="btn-3" class="lbl">More +  </label>
+          <a href="">More</a>
+          <input type="checkbox" id="btn-3">
+          <ul>
+            <li><a href="">Sub menu 1</a></li>
+            <li><a href="">Sub menu 2</a></li>
+            <li><a href="">Sub menu 3</a></li>
+          </ul>
+        </li>-->
+            </ul>
+        </li>
+
+        <li *ngIf="authority">
+            <label for="btn-3" class="lbl">Virtual Machines +</label>
+
+            <a href="">Virtual Machines</a>
+            <input type="checkbox" id="btn-3">
+
+            <ul>
+                <li *ngIf="authority === 'manager'">
+                    <a routerLink="add-virtual-machines">Add VM</a>
+                </li>
+                <li *ngIf="authority">
+                    <a routerLink="virtualMachines">VM List</a>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <li *ngIf="authority === 'manager'">
+            <a routerLink="leavedetails">Leave Details</a>
+        </li>
+
+        <li *ngIf="authority === 'trainer'">
+            <a routerLink="leavemanagement">Leave Management</a>
+        </li>
+
+
+
+
+        <li *ngIf="authority === 'manager'">
+            <label for="btn-4" class="lbl">More +</label>
+
+            <a href="">Add More</a>
+            <input type="checkbox" id="btn-4">
+
+            <ul>
+                <li>
+                    <a href="">Coordinator</a>
+                </li>
+                <li>
+                    <a href="">Location</a>
+                </li>
+                <li>
+                    <a href="">Room</a>
+                </li>
+
+            </ul>
+
+
+        </li>
+
+        <li *ngIf="!authority">
+            <a routerLink="auth/login">Login</a>
+        </li>
+
+
+    </ul>
 </nav>
 
 
 
 
 
-<div class="container">
-  <router-outlet></router-outlet>
+<button *ngIf="isShow" (click)="gotoTop()">👆</button>
+
+
+
+<div class="container " style="margin-bottom: 5%;margin-top: 5%;">
+    <router-outlet></router-outlet>
 </div>
+
+
+
+<footer class="text-center text-lg-start fixed-bottom" style="margin-top: 20px;">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright: IFS.com
+
+    </div>
+    <!-- Copyright -->
+</footer>

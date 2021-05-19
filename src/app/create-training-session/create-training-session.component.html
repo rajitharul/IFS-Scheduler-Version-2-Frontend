@@ -1,8 +1,3 @@
-<button mat-button color="primary">Mat Button</button>
-
-
-
-
 
     <h1>
         Create Training Session
@@ -101,9 +96,6 @@
 
 
 
-
-
-
     
         <div class="form-group">
             <label >
@@ -116,13 +108,39 @@
     
         </div>
     
-        <button class="btn btn-success btn-lg btn-block" type="submit">Create Session</button>
     
     </form>
 
 
 
 
+
+    <h6>Location Allocation </h6>
+
+    <select [(ngModel)]="trainingSession.location">
+        <option *ngFor="let location of availablelocations" [ngValue]="location">
+            Location is : {{location}}
+          </option>
+    </select>   
+
+    <h6>Training Cordinator Allocation </h6>
+
+    <select [(ngModel)]="trainingSession.trainingCordinator">
+        <option [ngValue]="null" [disabled]="true" >trainingCordinators</option>
+        <option *ngFor="let trainingCordinator of availabletrainingCordinators" [ngValue]="trainingCordinator">
+            trainingCordinator is : {{trainingCordinator.name}}
+          </option>
+    </select>   
+
+
+    <h6>Training Room Allocation Select the room with appropriate Capacity </h6>
+
+    <select [(ngModel)]="trainingSession.trainingRoom">
+        <option [ngValue]="null" [disabled]="true" >trainingRooms</option>
+        <option *ngFor="let trainingRoom of availabletrainingRooms" [ngValue]="trainingRoom">
+            trainingRoom Capacity is : {{trainingRoom.capacity}}
+          </option>
+    </select>   
 
 
 
@@ -163,10 +181,19 @@
 
     </form>
 
+    <br>
+    <br>
+
+    <button class="btn btn-primary" (click)="getAvailableVM()" >Get Available VirtualMachines</button>
+    <br>
+    <br>
+
+
+
     <select [(ngModel)]="virtualMachineId">
         <option [ngValue]="null" [disabled]="true" >VM  Available</option>
         <option *ngFor="let virtualMachine of virtualMachines" [value]="virtualMachine.virtualMachineId">
-            Id is : {{virtualMachine.product}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  
+            Id is : {{virtualMachine.virtualMachineId}}  region :  {{virtualMachine.region}}  Version is  {{virtualMachine.version}}  Name is {{virtualMachine.name}} 
         </option>
     </select>  
 
@@ -187,7 +214,7 @@
         <Br>
 
            
-        <button mat-button type="submit">Add Vm</button>
+        <button class="btn btn-primary">Add Vm</button>
 
     </form>
 
@@ -243,6 +270,14 @@
 
 
     </form>
+    
+    <br>
+    <br>
+
+    <button class="btn btn-primary" (click)="getAvailableTrainers()" >Get Available Trainers</button>
+    <br>
+    <br>
+
 
 
      
@@ -279,8 +314,72 @@
 
 
 
+    <button class="btn btn-success btn-lg btn-block" (click)="onSubmit()">Create Session</button>
+    <button class="btn btn-success btn-lg btn-block" (click)="loadTrainingSession()">Load Training Sessions on Calender </button>
 
 
-   
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+
             
 
+   <div class="row text-center">
+
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                Previous
+            </div>
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                Today
+            </div>
+            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                Next
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
+                [class.active]="view === CalendarView.Month">
+                Month
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Week)"
+                [class.active]="view === CalendarView.Week">
+                Week
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                Day
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div [ngSwitch]="view">
+
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-month-view>
+
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
+    </mwl-calendar-week-view>
+
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events">
+    </mwl-calendar-day-view>
+
+</div>

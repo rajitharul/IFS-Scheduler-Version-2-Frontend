@@ -40,6 +40,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FooterComponent } from './footer/footer.component';
 import { LeaveloginComponent } from './components/leavelogin/leavelogin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddLocationComponent } from './add-location/add-location.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,7 @@ import { LeaveloginComponent } from './components/leavelogin/leavelogin.componen
     LeavemanageComponent,
     FooterComponent,
     LeaveloginComponent,
+    AddLocationComponent,
 
 
   ],
@@ -83,7 +86,8 @@ import { LeaveloginComponent } from './components/leavelogin/leavelogin.componen
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    })
+    }),
+    NgbModule
 
 
   ],

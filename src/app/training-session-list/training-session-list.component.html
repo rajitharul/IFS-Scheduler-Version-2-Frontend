@@ -7,7 +7,10 @@
             <th>Duration</th>
             <th>Participants</th>
             <th>IFS Application Version</th>
-            
+            <th>Training Session room Capacity</th>
+               
+            <th>Location</th>
+            <th>Cordinator</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -18,7 +21,10 @@
             <td>{{ trainingSession.duration }}</td>
             <td>{{ trainingSession.maxParticipants }}</td>
             <td>{{ trainingSession.ifsApplicationVersion }}</td>
-            
+            <td>{{ trainingSession.trainingRoom.capacity }}</td>
+            <td>{{ trainingSession.location.locationName }}</td>
+            <td>{{ trainingSession.trainingCordinator.name }}</td>
+
             <td>
                 <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning" >Update</button>
                 
