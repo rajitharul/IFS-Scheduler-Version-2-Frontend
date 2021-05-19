@@ -42,6 +42,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LeaveloginComponent } from './components/leavelogin/leavelogin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddLocationComponent } from './add-location/add-location.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import { AddLocationComponent } from './add-location/add-location.component';
     FooterComponent,
     LeaveloginComponent,
     AddLocationComponent,
+    SearchfilterPipe,
 
 
   ],

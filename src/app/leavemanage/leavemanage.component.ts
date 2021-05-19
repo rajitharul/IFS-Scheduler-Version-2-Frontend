@@ -12,7 +12,7 @@ import { LeaveInfo } from '../auth/Manage-leaveInfo';
 })
 export class LeavemanageComponent implements OnInit {
   leaves: LeaveInfo[];
-
+  searchValue: string;
 
   //tasks: Observable<Array<ITask>>;
   //tasks = [{ title: 'test' }];

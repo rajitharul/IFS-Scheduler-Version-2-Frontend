@@ -1,29 +1,49 @@
-<h2>Trainer List</h2>
-<table class="table table-hover table-dark">
-    <thead>
+<div class="form-group row"></div>
+<div class="form-group row">
+    <h3 class="h2">Trainer Leave Note List</h3>
+    <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+    <div class="col-sm-6">
+        <input type="text" [(ngModel)]="searchValue" class="form-control" id="search" />
+    </div>
+</div>
+<!-- <table class="table table-hover table-dark"> -->
+<table class="table">
+    <thead class="thead-dark">
         <tr>
-            <th>Trainer ID</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Title</th>
-            <th>Type</th>
+            <th scope="col">TrainerID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Title</th>
+            <!-- <th>Type</th> -->
 
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let trainer of leaves">
-            <td>{{ trainer['trainerId'] }}</td>
-            <td>{{ trainer.date }}</td>
-            <td>{{ trainer.description }}</td>
-            <td>{{ trainer.title }}</td>
+        <tr *ngFor="let trainer of leaves | searchfilter:searchValue">
+            <!-- //response[0].trainer.trainer_id -->
+            <td scope="col">{{ trainer.trainer.trainerId}} </td>
+            <td scope="col">{{ trainer.trainer.name}} </td>
+            <td scope="col">{{ trainer.date }}</td>
+            <td scope="col">{{ trainer.description }}</td>
+            <td scope="col">{{ trainer.title }}</td>
 
-            <td>
+            <!-- <td>
                 <button class="btn btn-info" style="margin-left: 10px;">{{
 
                     trainer.type }}</button>
-            </td>
+            </td> -->
 
 
         </tr>
     </tbody>
 </table>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>

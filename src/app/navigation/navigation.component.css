@@ -5,11 +5,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 73%;
+    width: 76%;
     border-top: 1px solid rgb(179, 178, 178);
     background: rgb(188, 131, 235);
+    
 }    
 
 button{
-    margin: 10px;
+    margin: 10px 30px  60px  30px ;
 }
