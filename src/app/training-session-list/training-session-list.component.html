@@ -1,51 +1,75 @@
 <div class="container">
 
 
-    <h2 style>Training Session List</h2>
+    <h2>Training Session List</h2>
 
-    <form (ngSubmit)="onSubmit()">
-
-
-        Filter: Date
-        <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate"> Delivery Method<input type="text" id="deliveryMethod" [(ngModel)]="deliveryMethod" name="deliveryMethod"> Ifs Version<input type="text" id="ifsVersion" [(ngModel)]="ifsVersion"
-            name="ifsVersion">
-
-        <button class="btn btn-dark" type="submit" style="margin-left: 10px;margin-bottom: 5px;">Filter</button>
-        <button class="btn btn-dark" type="reset" (click)="goBackToPrev()" style="margin-left: 10px;margin-bottom: 5px;">Reset</button>
+    <div class="row">
 
 
-    </form>
+        <form (ngSubmit)="onSubmit()" class="shadow p-3 mb-9 bg-white rounded">
+            <div class="row">
+                <div class="col filter" style="float: left;">
+                    Filter:
+                </div>
+                <div class="col filter">
+                    Start Date
+                    <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate">
+                </div>
+                <div class="col filter">
+                    Delivery Method
+                    <input type="text" id="deliveryMethod" [(ngModel)]="deliveryMethod" name="deliveryMethod">
+                </div>
+
+                <div class="col filter">
+                    Ifs Version
+                    <input type="text" id="ifsVersion" [(ngModel)]="ifsVersion" name="ifsVersion">
+                </div>
+
+                <div class="col filter">
+                    <button class="btn btnfilter" type="submit" style="margin-left: 10px;margin-bottom: 5px;">Filter</button>
+                    <button class="btn btnfilter" type="reset" (click)="goBackToPrev()" style="margin-left: 10px;margin-bottom: 5px;">Reset</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    <div class="row">
 
 
+        <table class="table table-striped table-bordered shadow p-3 mb-5 bg-white rounded">
+            <thead>
+                <tr>
+                    <th>Session Name</th>
+                    <th>Start Date</th>
+                    <th>Duration</th>
+                    <th>Participants</th>
+                    <th>IFS Application Version</th>
+              
 
-    <table class="table table-striped table-bordered shadow p-3 mb-5 bg-white rounded">
-        <thead>
-            <tr>
-                <th>Session Name</th>
-                <th>Start Date</th>
-                <th>Duration</th>
-                <th>Participants</th>
-                <th>IFS Application Version</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trainingSession of trainingSessions">
+                    <td>{{ trainingSession.sessionName }}</td>
+                    <td>{{ trainingSession.startDate }}</td>
+                    <td>{{ trainingSession.duration }}</td>
+                    <td>{{ trainingSession.maxParticipants }}</td>
+                    <td>{{ trainingSession.ifsApplicationVersion }}</td>
 
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let trainingSession of trainingSessions">
-                <td>{{ trainingSession.sessionName }}</td>
-                <td>{{ trainingSession.startDate }}</td>
-                <td>{{ trainingSession.duration }}</td>
-                <td>{{ trainingSession.maxParticipants }}</td>
-                <td>{{ trainingSession.ifsApplicationVersion }}</td>
+                    <td>
+                        <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning">Update</button>
 
-                <td>
-                    <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning">Update</button>
+                        <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
 
-                    <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                        <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
+
 </div>

@@ -38,7 +38,7 @@ import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-training-session',
-  templateUrl: './create-training-session.component.html',
+  templateUrl: './create-training-session.component design.html',
   styleUrls: ['./create-training-session.component.css']
 })
 export class CreateTrainingSessionComponent implements OnInit {

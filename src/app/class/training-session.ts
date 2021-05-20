@@ -1,6 +1,8 @@
 import { Trainer } from './trainer';
 import { VirtualMachine } from './virtual-machine';
 
+import { Location } from './location';
+
 import { TrainingRoom } from './training-room';
 import { TrainingCordinator } from './training-cordinator';
 

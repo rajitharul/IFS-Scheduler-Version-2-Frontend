@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TrainingSession } from '../class/training-session';
 import { TrainingSessionService } from '../services/training-session.service';
 
+import { Location } from '../class/location';
+import { TrainingRoom } from '../class/training-room';
+import { TrainingCordinator } from '../class/training-cordinator';
+
+
 @Component({
   selector: 'app-training-session-details',
   templateUrl: './training-session-details.component.html',
@@ -20,6 +25,7 @@ export class TrainingSessionDetailsComponent implements OnInit {
     this.trainingSession= new TrainingSession();
     this.trainingSessionService.getTrainingSessionById(this.id).subscribe( data=>{
       this.trainingSession= data;
+      console.log(data);
     });
   }
 

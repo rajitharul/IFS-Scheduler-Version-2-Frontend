@@ -6,6 +6,11 @@ import { VirtualMachine } from '../class/virtual-machine';
 import { TrainerService } from '../services/trainer.service';
 import { TrainingSessionService } from '../services/training-session.service';
 import { VirtualMachineService } from '../services/virtual-machine.service';
+import { TrainingCordinator } from '../class/training-cordinator';
+import { TrainingRoom } from '../class/training-room';
+import {GeneralService} from '../services/general.service';
+
+
 
 @Component({
   selector: 'app-update-training-session',
@@ -22,10 +27,14 @@ export class UpdateTrainingSessionComponent implements OnInit {
   trainers : Trainer[];
   virtualMachines : VirtualMachine[];
 
+  availablelocations : Location[];
+  availabletrainingCordinators : TrainingCordinator[];
+  availabletrainingRooms  : TrainingRoom[];
+
 
   virtualMachineId :number = 0;
 
-  constructor(private trainingSessionService:TrainingSessionService, private route:ActivatedRoute,
+  constructor(private generalService:GeneralService , private trainingSessionService:TrainingSessionService, private route:ActivatedRoute,
     private router:Router ,   private virtualMachineService:VirtualMachineService , private trainerService:TrainerService,
     ) { }
 
@@ -36,6 +45,29 @@ export class UpdateTrainingSessionComponent implements OnInit {
       this.trainingSession = data;
       console.log(this.trainingSession);
     },error=>console.log(error));
+
+    this.generalService.getAlllocations().subscribe(data=>{
+      this.availablelocations = data;
+      console.log(data);
+    },
+    error => console.error(error));
+
+    this.generalService.getAlltrainerCordinators().subscribe(data=>{
+      this.availabletrainingCordinators = data;
+      console.log(data);
+
+    },
+    error => console.error(error));
+
+    this.generalService.trainingRooms().subscribe(data=>{
+      this.availabletrainingRooms = data;
+      console.log(data);
+
+    },
+    error => console.error(error));
+
+
+
   }
 
   onSubmit(){

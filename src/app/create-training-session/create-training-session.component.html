@@ -119,7 +119,7 @@
 
     <select [(ngModel)]="trainingSession.location">
         <option *ngFor="let location of availablelocations" [ngValue]="location">
-            Location is : {{location}}
+            Location is : {{location.id}} {{location.region}} {{location.locationName}}
           </option>
     </select>   
 

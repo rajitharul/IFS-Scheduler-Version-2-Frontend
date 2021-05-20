@@ -53,8 +53,6 @@ export class TrainingSessionListComponent implements OnInit {
 
   private getTrainingSessions(){
     
-    console.log(' Authorities are' + this.token.getAuthorities()[0])
-
     if(this.info.username == 'rajith'){
       this.trainingSessionService.getTrainingSessionList().subscribe(data=>{
         this.trainingSessions = data;
@@ -84,6 +82,7 @@ export class TrainingSessionListComponent implements OnInit {
   }
 
   deleteTrainingSession(id:number){
+    alert("Want to delete a Training Session ?");
     this.trainingSessionService.deleteTrainingSession(id).subscribe(data=>{
       console.log(data);
       this.getTrainingSessions();
