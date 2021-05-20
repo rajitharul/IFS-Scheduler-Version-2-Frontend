@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { LeaveInfo } from '../auth/Manage-leaveInfo';
 import { TrainingCordinator } from '../class/training-cordinator';
 import { TrainingRoom } from '../class/training-room';
+import { Location } from '../class/location';
+
+
+
 
 @Injectable({
   providedIn: 'root'

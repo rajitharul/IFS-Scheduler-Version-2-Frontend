@@ -18,6 +18,10 @@ import { VirtualMachine } from '../class/virtual-machine';
 import { TrainingCordinator } from '../class/training-cordinator';
 import { TrainingRoom } from '../class/training-room';
 
+import { Location } from '../class/location';
+
+
+
 import {   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,

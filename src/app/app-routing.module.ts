@@ -21,6 +21,10 @@ import { MailComponent } from './components/task/mail/mail.component';
 import { SubordinatesdetailsComponent } from './components/task/subordinatesdetails/subordinatesdetails.component';
 import { LeavemanageComponent } from './leavemanage/leavemanage.component';
 import { LeaveloginComponent } from './components/leavelogin/leavelogin.component';
+import { AddTrainingCordinatorComponent } from './add-training-cordinator/add-training-cordinator.component';
+import { AddTrainingLocationComponent } from './add-training-location/add-training-location.component';
+import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
+
 
 
 
@@ -40,6 +44,9 @@ const routes: Routes = [
   { path: 'add-virtual-machines', component: AddVirtualMachineComponent },
   { path: 'virtualMachines', component: VirtualMachineListComponent },
   { path: 'leavedetails', component: LeavemanageComponent },
+  { path : 'add-training-coordinator', component:AddTrainingCordinatorComponent},
+  { path : 'add-training-location', component:AddTrainingLocationComponent},
+  { path : 'add-training-room', component:AddTrainingRoomComponent},
   {
     path: 'leavemanagement', component: LeaveApplicationComponent,
     children: [

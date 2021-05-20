@@ -43,6 +43,9 @@ import { LeaveloginComponent } from './components/leavelogin/leavelogin.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { SearchfilterPipe } from './searchfilter.pipe';
+import { AddTrainingCordinatorComponent } from './add-training-cordinator/add-training-cordinator.component';
+import { AddTrainingLocationComponent } from './add-training-location/add-training-location.component';
+import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +75,9 @@ import { SearchfilterPipe } from './searchfilter.pipe';
     LeaveloginComponent,
     AddLocationComponent,
     SearchfilterPipe,
+    AddTrainingCordinatorComponent,
+    AddTrainingLocationComponent,
+    AddTrainingRoomComponent,
 
 
   ],

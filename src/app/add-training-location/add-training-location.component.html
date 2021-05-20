@@ -1,0 +1,36 @@
+<br><br>
+
+<div class="col-5 form-div">
+
+    <form (ngSubmit)="onSubmit(); myForm.resetForm()" class=" shadow p-3 mb-9 bg-white rounded" #myForm="ngForm">
+
+        <h2>
+            Add Training Location
+        </h2>
+
+        <br>
+
+        <div class="form-group">
+            <label>
+                Name
+            </label>
+
+            <input type="text" class="form-control" id="name" [(ngModel)]="trainingLocation.locationName" name="locationName" required>
+
+        </div>
+
+        <div class="form-group">
+            <label>
+                Region
+            </label>
+
+            <input type="text" class="form-control" id="region" [(ngModel)]="trainingLocation.region" name="region" required>
+
+        </div>
+
+        <br>
+        <button class="btn" type="submit">Add Location</button>
+
+    </form>
+
+</div>

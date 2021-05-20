@@ -127,6 +127,7 @@
                 <li *ngFor="let temp of trainerIds">
 
                     Trainer Id : {{temp}}
+                    <button (click)="removeTrainer(temp)">Delete</button>
                 </li>
             </div>
 

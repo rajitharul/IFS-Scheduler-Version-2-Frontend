@@ -9,6 +9,7 @@ import { VirtualMachineService } from '../services/virtual-machine.service';
 import { TrainingCordinator } from '../class/training-cordinator';
 import { TrainingRoom } from '../class/training-room';
 import {GeneralService} from '../services/general.service';
+import { Location } from '../class/location';
 
 
 
