@@ -65,7 +65,8 @@ export class SignupComponent implements OnInit {
 
       this.trainerService.addTrainer(this.trainer).subscribe(data => {
         console.log(data);
-        console.log('trainer Added')
+        console.log('trainer Added');
+        alert("Trainer Successfully Added !");
       },
         error => console.error(error));
 

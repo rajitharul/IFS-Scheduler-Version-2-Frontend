@@ -45,6 +45,7 @@ export class UpdateTrainingSessionComponent implements OnInit {
     console.log(this.trainingSession);
 
     this.trainingSessionService.updateTrainingSession(this.id,this.trainingSession).subscribe(data=>{
+      alert("Training Session Updated!");
       this.goToTrainingSessionList();
     },error =>console.log(error));
   }
@@ -57,6 +58,7 @@ export class UpdateTrainingSessionComponent implements OnInit {
   saveTrainingSession(){
     this.trainingSessionService.createTrainingSession(this.trainingSession).subscribe(data=>{
       console.log(data);
+      
       this.goToTrainingSessionList();
     },
     error => console.error(error));

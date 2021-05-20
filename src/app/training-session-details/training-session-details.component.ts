@@ -20,6 +20,7 @@ export class TrainingSessionDetailsComponent implements OnInit {
     this.trainingSession= new TrainingSession();
     this.trainingSessionService.getTrainingSessionById(this.id).subscribe( data=>{
       this.trainingSession= data;
+      console.log(data);
     });
   }
 

@@ -82,6 +82,7 @@ export class TrainingSessionListComponent implements OnInit {
   }
 
   deleteTrainingSession(id:number){
+    alert("Want to delete a Training Session ?");
     this.trainingSessionService.deleteTrainingSession(id).subscribe(data=>{
       console.log(data);
       this.getTrainingSessions();
