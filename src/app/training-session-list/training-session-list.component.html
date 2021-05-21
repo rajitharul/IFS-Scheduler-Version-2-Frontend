@@ -59,13 +59,18 @@
                     <td>{{ trainingSession.maxParticipants }}</td>
                     <td>{{ trainingSession.ifsApplicationVersion }}</td>
 
-                    <td>
-                        <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning">Update</button>
-
-                        <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-
-                        <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
-                    </td>
+                    <td><div class="row">
+                        <div class="col">
+                            <button (click)="updateTrainingSession(trainingSession.id)" class="btn btn-warning">Update</button>
+                        </div>
+                        <div class="col">
+                            <button (click)="deleteTrainingSession(trainingSession.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                        </div>
+                        <div class="col">
+                            <button (click)="trainingSessionDetails(trainingSession.id)" class="btn btn-info" style="margin-left: 10px;">View</button>
+                        </div>
+                    </div>
+                </td>
                 </tr>
             </tbody>
         </table>

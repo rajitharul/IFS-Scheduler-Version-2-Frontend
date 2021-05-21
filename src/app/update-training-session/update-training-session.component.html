@@ -109,9 +109,9 @@
                     Available Trainers
                 </form>
 
-                <select [(ngModel)]="trainerId" name="trainerId" id="trainerId" class="form-group">
+                <select [(ngModel)]="tempTrainer" name="tempTrainer" id="tempTrainer" class="form-group">
                     <option [ngValue]="null" [disabled]="true">Trainers Available</option>
-                    <option *ngFor="let trainer of trainers" [value]="trainer.trainerId">
+                    <option *ngFor="let trainer of trainers" [value]="trainer">
                             Name : {{trainer.name}} specialities are {{trainer.qualifications}}
                     </option>
                 </select>
@@ -125,10 +125,8 @@
 
                 <li *ngFor="let temp of trainingSession.trainers">
 
-                    Trainer Id : {{temp.trainerId}}
-
-                    Trainer Name : {{temp.name}}
-
+                    Trainer Id : {{temp.trainerId}}  {{temp.name}}
+                    <button (click)="removeTrainer(temp)">Delete</button>
                 </li>
             </div>
 
@@ -167,14 +165,10 @@
 
                 <h6>Added Virtual Machine ID's Are </h6>
 
-                <li *ngFor="let temp of trainingSession.virtualMachines ">
+                <li *ngFor="let temp of trainingSession.virtualMachines">
 
-                    VM Id : {{temp.virtualMachineId}}
-                    VM Name : {{temp.name}}
-                    VM Product : {{temp.product}}
-
-
-
+                    VM Id : {{temp.virtualMachineId}}  VM Name {{temp.name}}
+                    <button (click)="removeVirtualMachineID(temp)">Delete</button>
                 </li>
 
             </div>
@@ -234,7 +228,7 @@
 <br>
 <br>
 
-<button class="btn btn-success btn-lg btn-block btn2" (click)="onSubmit()">Create Session</button>
+<button class="btn btn-success btn-lg btn-block btn2" (click)="onSubmit()">Update Training Session</button>
 
 
 

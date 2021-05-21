@@ -31,9 +31,12 @@ export class UpdateTrainingSessionComponent implements OnInit {
   availablelocations : Location[];
   availabletrainingCordinators : TrainingCordinator[];
   availabletrainingRooms  : TrainingRoom[];
-
-
   virtualMachineId :number = 0;
+
+
+  tempTrainer : Trainer;
+
+
 
   constructor(private generalService:GeneralService , private trainingSessionService:TrainingSessionService, private route:ActivatedRoute,
     private router:Router ,   private virtualMachineService:VirtualMachineService , private trainerService:TrainerService,
@@ -68,8 +71,9 @@ export class UpdateTrainingSessionComponent implements OnInit {
     error => console.error(error));
 
 
-
   }
+
+
 
   onSubmit(){
     
@@ -87,6 +91,8 @@ export class UpdateTrainingSessionComponent implements OnInit {
   }
 
 
+
+  
   saveTrainingSession(){
     this.trainingSessionService.createTrainingSession(this.trainingSession).subscribe(data=>{
       console.log(data);
@@ -148,14 +154,40 @@ console.log( this.trainingSession.startDate)
 
   addTrainer(){
 
-    this.trainerIds.push(this.trainerId);   
-      console.log("Trainer Id pushed" + this.trainerId);
-      console.log("Trainer Ids"  + this.trainerIds);
+    this.trainingSession.trainers.push(this.tempTrainer);
+
+    console.log('Training Session Trainers are ' + this.trainingSession.trainers)
+
+  }
+
+
+  removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  removeVirtualMachineID(tempVm : VirtualMachine ){
+
+    const index: number = this.trainingSession.virtualMachines.indexOf(tempVm);
+    if (index !== -1) {
+        this.trainingSession.virtualMachines.splice(index, 1);
+    }     
 
 
   }
 
 
+  removeTrainer(tempTrainer : Trainer ){
+
+    const index: number = this.trainingSession.trainers.indexOf(tempTrainer);
+    if (index !== -1) {
+        this.trainingSession.trainers.splice(index, 1);
+    }     
+
+  }
 
 
 }

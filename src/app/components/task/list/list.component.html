@@ -2,7 +2,7 @@
     <h1>Leave Notes</h1>
     <mat-selection-list [multiple]="false">
         <div class="mat-list-option-cover">
-            <mat-list-option *ngFor="let task of this.tasks | async" (click)=" onOpenDialog(task)">
+            <mat-list-option *ngFor="let task of this.tasks  | async | slice:0:10 " (click)=" onOpenDialog(task)">
                 <div class="d-flex justify-content-between">
                     <span class="task-date">
                         {{ task.date | date: "mediumDate" }}
@@ -19,3 +19,6 @@
         </div>
     </mat-selection-list>
 </div>
+<br />
+<br />
+<br />
