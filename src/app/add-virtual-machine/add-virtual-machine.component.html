@@ -1,77 +1,105 @@
 <div class="col-md-6 offset-md-3">
 
-    <h3 >
-        Add Virtual Machine
-    </h3>
-    <form (ngSubmit) ="onSubmit()">
-    
-        <div class="form-group">
-            <label >
-                Product 
-            </label>
-    
-            <input type="text" class="form-control" id="product"
-                [(ngModel)]="virtualMachine.product" name="product">
-    
+  <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()" class=" shadow p-3 mb-5 bg-white rounded">
+    <div formGroupName="vm" class="form-area">
+      <h2>
+        <b>Add Virtual Machine</b>
+      </h2>
+
+
+
+      <div class="form-group">
+        <div class="col-md-2"><label>Virtual Machine Name</label></div>
+        <div class="col-md-9">
+          <div class="input-space">
+            <input formControlName="virtualMachineName" type="text">
+            <div *ngIf="virtualMachineName.invalid && (virtualMachineName.dirty || virtualMachineName.touched )"
+              class="alert alert-danger mt-1">
+              <div *ngIf="virtualMachineName.errors.required">
+                Virtual Machine Name is required.
+              </div>
+              <div *ngIf="virtualMachineName.errors.minlength">
+                Virtual Machine Name must be atleast 2 characters long.
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-
-
-        <div class="form-group">
-            <label >
-                 Name
-            </label>
-    
-            <input type="text" class="form-control" id="name"
-                [(ngModel)]="virtualMachine.name" name="name">
-    
+      <div class="form-group">
+        <div class="col-md-2"><label>Product</label></div>
+        <div class="col-md-9">
+          <div class="input-space">
+            <input formControlName="product" type="text">
+            <div *ngIf="product.invalid && (product.dirty || product.touched )" class="alert alert-danger mt-1">
+              <div *ngIf="product.errors.required">
+                Product is required.
+              </div>
+              <div *ngIf="product.errors.minlength">
+                Product must be atleast 2 characters long.
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-
-
-
-    
-        <div class="form-group">
-            <label >
-                Version
-            </label>
-    
-            <input type="text" class="form-control" id="version"
-                [(ngModel)]="virtualMachine.version" name="version">
-    
+      <div class="form-group">
+        <div class="col-md-2"><label>Version</label></div>
+        <div class="col-md-9">
+          <div class="input-space">
+            <input formControlName="version" type="text">
+            <div *ngIf="version.invalid && (version.dirty || version.touched )" class="alert alert-danger mt-1">
+              <div *ngIf="version.errors.required">
+                Version is required.
+              </div>
+              <div *ngIf="version.errors.minlength">
+                Version must be atleast 2 characters long.
+              </div>
+            </div>
+          </div>
         </div>
-    
-        <div class="form-group">
-            <label >
-                Region
-            </label>
-    
-            <input type="text" class="form-control" id="region"
-                [(ngModel)]="virtualMachine.region" name="region">
-    
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-2"><label>Region</label></div>
+        <div class="col-md-9">
+          <div class="input-space">
+            <input formControlName="region" type="text">
+            <div *ngIf="region.invalid && (region.dirty || region.touched )" class="alert alert-danger mt-1">
+              <div *ngIf="region.errors.required">
+                Region is required.
+              </div>
+              <div *ngIf="region.errors.minlength">
+                Region must be atleast 2 characters long.
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
+      <div class="form-group">
+        <div class="col-md-2"><label>Status</label></div>
+        <div class="col-md-9">
+          <div class="input-space">
 
-
-
-
-        <div class="form-group">
-
-            
-            <label >
-                Status
-            </label>
-            <select class="form-control"  id="status" [(ngModel)]="virtualMachine.status" name="status">
-                <option value="Available">Available</option>
-                <option value="On repair">On Repair</option>
+            <select formControlName="status" name="status" id="status" class="form-control">
+              <option [ngValue]="null" [disabled]="true">Status</option>
+              <option [value]="status1">working</option>
+              <option [value]="status2">repairing</option>
             </select>
 
-   
+
+          </div>
         </div>
-    
-        <button class="btn btn-dark" type="submit">Add Virtual Machine</button>
-    
-    </form>
+      </div>
+
+
+
+      <br>
+
+      <button class="btn btn-success" type="submit">Add Virtual Machine</button>
+    </div>
+
+  </form>
 
 </div>
-

@@ -1,26 +1,61 @@
-<h2 >Virtual Machine List</h2>
-<table class="table table-hover table-dark">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Name</th>
+<br>
+<h1><b>Virtual Machine List</b></h1>
 
-            <th>Version</th>
-            <th>Region</th>
-            <th>Status</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let virtualMachine of virtualMachines">
-            <td>{{ virtualMachine.product }}</td>
-            <td>{{ virtualMachine.name }}</td>
-            <td>{{ virtualMachine.version }}</td>
-            <td>{{ virtualMachine.region }}</td>
-            <td>{{ virtualMachine.status }}</td>
-            
-            
-            
-        </tr>
-    </tbody>
+<form (ngSubmit)="onSubmit()" class="shadow p-3 mb-5 bg-white rounded">
+
+
+  <b>Filter:</b>
+  Product<input type="text" id="product" [(ngModel)]="product" name="product">
+
+  Version<input type="text" id="version" [(ngModel)]="version" name="version">
+
+  Region<input type="text" id="region" [(ngModel)]="region" name="region">
+
+  <button class="btn btn-dark" type="submit">Filter</button>
+  <button class="btn btn-dark"  (click)="getVirtualMachines()">Get All</button>
+
+</form>
+
+<br>
+
+<table class="table table-striped table-bordered shadow p-3 mb-5 bg-white rounded">
+  <thead class="table-dark rounded">
+    <tr>
+      <th>Virtual Machine Name</th>
+      <th>Product</th>
+      <th>Version</th>
+      <th>Region</th>
+      <th>Status</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+  <tbody class="table-light rounded">
+    <tr *ngFor="let virtualMachine of virtualMachines">
+      <td>{{ virtualMachine.name }}</td>
+      <td>{{ virtualMachine.product }}</td>
+      <td>{{ virtualMachine.version }}</td>
+      <td>{{ virtualMachine.region }}</td>
+      <td>{{ virtualMachine.status }}</td>
+      <td>
+
+        <button (click)="virtualMachineDetails(virtualMachine.virtualMachineId)" class="btn btn-info"
+          style="margin-left: 10px;">View</button>
+
+        <button (click)="updateVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'"
+          class="btn btn-success" style="margin-left: 10px;">Update</button>
+
+        <button (click)="deleteVirtualMachine(virtualMachine.virtualMachineId)" *ngIf="authority === 'manager'"
+          class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+
+
+
+      </td>
+
+
+
+
+    </tr>
+  </tbody>
 </table>
+<br>
