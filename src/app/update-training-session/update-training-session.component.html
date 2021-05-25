@@ -103,15 +103,19 @@
             <div class="col-sm-5 subform">
 
                 <h2>Trainer Allocation Section</h2>
+                
+                <form (ngSubmit)="getAvailableTrainers()">
+                    <button class="btn btn-primary btn1" type="submit">Get Available Trainers</button>
+                </form>
 
                 
                 <form (ngSubmit)="getAvailableTrainers()">
                     Available Trainers
                 </form>
 
-                <select [(ngModel)]="tempTrainer" name="tempTrainer" id="tempTrainer" class="form-group">
+                <select [(ngModel)]="trainerId" name="trainerId" id="trainerId" class="form-group">
                     <option [ngValue]="null" [disabled]="true">Trainers Available</option>
-                    <option *ngFor="let trainer of trainers" [value]="trainer">
+                    <option *ngFor="let trainer of availableTrainers" [value]="trainer.trainerId">
                             Name : {{trainer.name}} specialities are {{trainer.qualifications}}
                     </option>
                 </select>
@@ -144,9 +148,9 @@
                 </form>
 
 
-                <select [(ngModel)]="virtualMachineId" name="vmId" id="vmId">
+                <select [(ngModel)]="virtualMachineId" name="virtualMachineId" id="virtualMachineId">
                         <option [ngValue]="null" [disabled]="true">VM Available</option>
-                        <option *ngFor="let virtualMachine of virtualMachines" [value]="virtualMachine.virtualMachineId">
+                        <option *ngFor="let virtualMachine of availableVirtualMachines" [value]="virtualMachine.virtualMachineId">
                             Id is : {{virtualMachine.virtualMachineId}} region : {{virtualMachine.region}} Version is {{virtualMachine.version}}
                         </option>
                     </select>
@@ -154,13 +158,7 @@
 
 
                 <form (ngSubmit)="addVm()">
-
-
-                    <Br>
-
-
                     <button class="btn btn-primary btn1" type="submit">Add Vm</button>
-
                 </form>
 
                 <h6>Added Virtual Machine ID's Are </h6>
@@ -192,14 +190,17 @@
     
     <h4>Location Allocation </h4>
 
+    <h6>Selected Location is  :{{trainingSession.location.id}} {{trainingSession.location.region}} {{trainingSession.location.locationName}}</h6>
     <select [(ngModel)]="trainingSession.location" class="form-group">
         <option *ngFor="let location of availablelocations" [ngValue]="location">
             Location is : {{location.id}} {{location.region}} {{location.locationName}}
           </option>
     </select>   
     
+
     <h4>Training Cordinator Allocation </h4>
-    
+        <h6>Selected Training Cordinator is  : {{trainingSession.trainingCordinator.name}}</h6>
+
     <select [(ngModel)]="trainingSession.trainingCordinator" class="form-group">
         <option [ngValue]="null" [disabled]="true" >trainingCordinators</option>
         <option *ngFor="let trainingCordinator of availabletrainingCordinators" [ngValue]="trainingCordinator">
@@ -210,7 +211,8 @@
     
 
     <h4>Training Room Allocation Select the room with appropriate Capacity </h4>
-    
+    <h6>Selected trainingRoom capacity is : {{trainingSession.trainingRoom.capacity}}</h6>
+
     <select [(ngModel)]="trainingSession.trainingRoom" class="form-group">
         <option [ngValue]="null" [disabled]="true" >trainingRooms</option>
         <option *ngFor="let trainingRoom of availabletrainingRooms" [ngValue]="trainingRoom">

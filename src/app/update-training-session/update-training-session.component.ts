@@ -24,17 +24,18 @@ export class UpdateTrainingSessionComponent implements OnInit {
   trainingSession: TrainingSession = new TrainingSession();
   virtualMachineIds :number[] = [];
   trainerIds :number[] = [];
-  trainerId :number = 0;
-  trainers : Trainer[];
-  virtualMachines : VirtualMachine[];
+  trainerId :number ;
+  availableTrainers : Trainer[];
+  availableVirtualMachines : VirtualMachine[];
 
   availablelocations : Location[];
   availabletrainingCordinators : TrainingCordinator[];
   availabletrainingRooms  : TrainingRoom[];
-  virtualMachineId :number = 0;
+  virtualMachineId :number;
 
 
-  tempTrainer : Trainer;
+  tempTrainer : Trainer = new Trainer();
+  tempVirtualMachine : VirtualMachine = new VirtualMachine();;
 
 
 
@@ -104,29 +105,24 @@ export class UpdateTrainingSessionComponent implements OnInit {
 
   addVm(){
 
-    if(this.trainingSession.ifsApplicationVersion !=null){      console.log("IFS Version is ......" + this.trainingSession.ifsApplicationVersion)
-  }else{
-    alert("Please enter the ifsApplicationVersion before checking for the VMs");
-  }
+    console.log('Virtual that was added is ' + this.virtualMachineId);
 
+      this.virtualMachineService.getVirtualMachinebyId(this.virtualMachineId).subscribe(data=>{
 
-    this.virtualMachineService.getVirtualMachinebyId(this.virtualMachineId).subscribe(data=>{
-
-      this.virtualMachineIds.push(this.virtualMachineId);
-      console.log(data);
-      console.log(this.virtualMachineIds)
+      this.trainingSession.virtualMachines.push(data);
     },
     error => console.error(error));
+
+    console.log('Training Session Virtual Machines are ' + this.trainingSession.virtualMachines);
 
   }
 
   getAvailableVM(){
 
-console.log( this.trainingSession.startDate)
 
      this.virtualMachineService.getAvailableVirtualMachineList(this.trainingSession.startDate , this.trainingSession.ifsApplicationVersion , this.trainingSession.duration).subscribe(data=>{
       console.log(data);
-      this.virtualMachines = data;
+      this.availableVirtualMachines = data;
     },
     error => console.error(error));
 
@@ -140,9 +136,9 @@ console.log( this.trainingSession.startDate)
           let type  = this.trainingSession.type;
 
           this.trainerService.getAvailableTrainerList(type ,this.trainingSession.startDate , this.trainingSession.duration ).subscribe(data=>{
-            this.trainers = data;
+            this.availableTrainers = data;
             
-            console.log( this.trainers);
+            console.log( this.availableTrainers);
           },
           error => console.error(error));
     
@@ -154,7 +150,17 @@ console.log( this.trainingSession.startDate)
 
   addTrainer(){
 
-    this.trainingSession.trainers.push(this.tempTrainer);
+    console.log('Trainer that was added is ' + this.trainerId);
+
+    
+   
+
+    this.trainerService.getTrainerbyId(this.trainerId).subscribe(data=>{
+
+      this.trainingSession.trainers.push(data);
+    },
+    error => console.error(error));
+
 
     console.log('Training Session Trainers are ' + this.trainingSession.trainers)
 
