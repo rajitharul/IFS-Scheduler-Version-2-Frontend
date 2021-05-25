@@ -50,9 +50,11 @@ export class SignupComponent implements OnInit {
       this.trainer.type = this.form.type;
 
 
-      this.trainerService.getTrainerbyName(this.trainer.name).subscribe(data=>{
+      this.trainerService.getTrainerbyUserName(this.signupInfo.username).subscribe(data=>{
           if(data != null){
-            alert('trainer Exists by the name ' + data.name);
+            console.log('trainer Exists by the username ' + data.user.username);
+
+            alert('trainer Exists by the username ' + data.user.username);
             this.trainerExists = true;
                 
           }
@@ -63,8 +65,13 @@ export class SignupComponent implements OnInit {
 
 
       if(this.trainerExists == true){
+        console.log('trainer Exists')
         window.location.reload();
         return;
+
+
+
+
       }else{
 
         this.trainerService.addTrainer(this.trainer).subscribe(data=>{

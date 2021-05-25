@@ -12,6 +12,7 @@ export class TrainerService {
   private baseURL ="http://localhost:8080/api/users";
   private tainerURL = "http://localhost:8080/api/trainers";
   private tainerbyNameURL = "http://localhost:8080/api/trainerByname";
+  private tainerbyUserNameURL = "http://localhost:8080/api/trainerByUserName";
 
 
 
@@ -41,4 +42,11 @@ export class TrainerService {
     return this.httpClient.get<Trainer>(`${this.tainerbyNameURL}/${trainerName}`)
   }
 
+
+  getTrainerbyUserName( trainerUserName : string):Observable<Trainer>{
+    return this.httpClient.get<Trainer>(`${this.tainerbyUserNameURL}/${trainerUserName}`)
+  }
+
+
+  
 }
