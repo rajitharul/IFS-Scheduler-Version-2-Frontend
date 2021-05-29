@@ -12,7 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AddVirtualMachineComponent implements OnInit {
 
 
-  checkoutFormGroup: FormGroup;
+  vmFormGroup: FormGroup;
 
   virtualMachine: VirtualMachine = new VirtualMachine();
   tempProduct: String;
@@ -27,7 +27,7 @@ export class AddVirtualMachineComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.checkoutFormGroup = this.formBuilder.group({
+    this.vmFormGroup = this.formBuilder.group({
       vm: this.formBuilder.group({
         virtualMachineName:new FormControl('', [Validators.required, Validators.minLength(2)]),
         product:new FormControl('', [Validators.required /*Validators.minLength(2)]*/]),
@@ -40,11 +40,11 @@ export class AddVirtualMachineComponent implements OnInit {
   }
 
   saveVirtualMachine(){
-    this.virtualMachine.name=this.checkoutFormGroup.get('vm').value.virtualMachineName.name;
-    this.virtualMachine.product=this.checkoutFormGroup.get('vm').value.product;
-    this.virtualMachine.version=this.checkoutFormGroup.get('vm').value.version;
-    this.virtualMachine.region=this.checkoutFormGroup.get('vm').value.region;
-    this.virtualMachine.status=this.checkoutFormGroup.get('vm').value.status;
+    this.virtualMachine.name=this.vmFormGroup.get('vm').value.virtualMachineName.name;
+    this.virtualMachine.product=this.vmFormGroup.get('vm').value.product;
+    this.virtualMachine.version=this.vmFormGroup.get('vm').value.version;
+    this.virtualMachine.region=this.vmFormGroup.get('vm').value.region;
+    this.virtualMachine.status=this.vmFormGroup.get('vm').value.status;
     this.tempProduct = this.virtualMachine.product;
     for (var i = 0; i < this.tempProduct.length; i++) {
       //this.trainingSession.ifsApplicationVersion.charAt(i))
@@ -67,12 +67,12 @@ export class AddVirtualMachineComponent implements OnInit {
 
   onSubmit(){
 
-    if(this.checkoutFormGroup.invalid){
-      this.checkoutFormGroup.markAllAsTouched();
+    if(this.vmFormGroup.invalid){
+      this.vmFormGroup.markAllAsTouched();
 
     }
 
-    if(this.checkoutFormGroup.valid) {
+    if(this.vmFormGroup.valid) {
       /* write your code here */
       this.saveVirtualMachine();
       console.log(this.virtualMachine);
@@ -84,10 +84,10 @@ export class AddVirtualMachineComponent implements OnInit {
 
   }
 
-  get virtualMachineName(){ return this.checkoutFormGroup.get('vm.virtualMachineName'); }
-  get product(){ return this.checkoutFormGroup.get('vm.product'); }
-  get version(){ return this.checkoutFormGroup.get('vm.version'); }
-  get region(){ return this.checkoutFormGroup.get('vm.region'); }
+  get virtualMachineName(){ return this.vmFormGroup.get('vm.virtualMachineName'); }
+  get product(){ return this.vmFormGroup.get('vm.product'); }
+  get version(){ return this.vmFormGroup.get('vm.version'); }
+  get region(){ return this.vmFormGroup.get('vm.region'); }
 
 
 }
