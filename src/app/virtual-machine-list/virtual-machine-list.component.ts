@@ -50,7 +50,7 @@ export class VirtualMachineListComponent implements OnInit {
     this.getVirtualMachines();
   }
 
-   getVirtualMachines(){
+  private getVirtualMachines(){
 
     this.info.authorities.every(role => {
       if (role['authority'] === 'ROLE_MANAGER') {

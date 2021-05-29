@@ -34,6 +34,9 @@ import { ShowComponent } from './components/task/show/show.component';
 import { SubordinatesdetailsComponent } from './components/task/subordinatesdetails/subordinatesdetails.component';
 import { LeavemanageComponent } from './leavemanage/leavemanage.component';
 
+import { UpdateVirtualMachineComponent } from './update-virtual-machine/update-virtual-machine.component';
+import { VirtualMachineDetailsComponent } from './virtual-machine-details/virtual-machine-details.component';
+
 
 //calender part
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -46,6 +49,7 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { AddTrainingCordinatorComponent } from './add-training-cordinator/add-training-cordinator.component';
 import { AddTrainingLocationComponent } from './add-training-location/add-training-location.component';
 import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +82,8 @@ import { AddTrainingRoomComponent } from './add-training-room/add-training-room.
     AddTrainingCordinatorComponent,
     AddTrainingLocationComponent,
     AddTrainingRoomComponent,
+    UpdateVirtualMachineComponent,
+    VirtualMachineDetailsComponent,
 
 
   ],
