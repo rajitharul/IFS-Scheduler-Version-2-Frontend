@@ -24,8 +24,8 @@ import { LeaveloginComponent } from './components/leavelogin/leavelogin.componen
 import { AddTrainingCordinatorComponent } from './add-training-cordinator/add-training-cordinator.component';
 import { AddTrainingLocationComponent } from './add-training-location/add-training-location.component';
 import { AddTrainingRoomComponent } from './add-training-room/add-training-room.component';
-
-
+import { VirtualMachineDetailsComponent } from './virtual-machine-details/virtual-machine-details.component';
+import { UpdateVirtualMachineComponent } from './update-virtual-machine/update-virtual-machine.component';
 
 
 const routes: Routes = [
@@ -43,6 +43,8 @@ const routes: Routes = [
   { path: 'update-training-session/:id', component: UpdateTrainingSessionComponent },
   { path: 'add-virtual-machines', component: AddVirtualMachineComponent },
   { path: 'virtualMachines', component: VirtualMachineListComponent },
+  { path : 'virtual-machine-details/:id', component: VirtualMachineDetailsComponent},
+  { path : 'update-virtual-machine/:id', component: UpdateVirtualMachineComponent},
   { path: 'leavedetails', component: LeavemanageComponent },
   { path : 'add-training-coordinator', component:AddTrainingCordinatorComponent},
   { path : 'add-training-location', component:AddTrainingLocationComponent},

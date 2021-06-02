@@ -11,6 +11,7 @@ export class TrainingSession {
     sessionName:string;
     startDate:Date;
     duration:number;
+    endDate: Date;
     maxParticipants:number;
     ifsApplicationVersion:String;
     bufferTime:number;
@@ -24,6 +25,6 @@ export class TrainingSession {
     location : Location;
     trainingRoom : TrainingRoom;
     trainingCordinator  :TrainingCordinator;
-        
+
 
 }

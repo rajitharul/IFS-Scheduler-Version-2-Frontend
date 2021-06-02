@@ -35,28 +35,22 @@ export class VirtualMachineService {
   }
 
 
-  
+
   getVirtualMachinebyName( virtualMachineName: number):Observable<VirtualMachine>{
     return this.httpClient.get<VirtualMachine>(`${this.baseURL}/${virtualMachineName}`)
   }
 
-  getAvailableVirtualMachineList(startDate:Date , version:String , duration:number):Observable<VirtualMachine[]>{
+  getAvailableVirtualMachineList(startDate:Date , product:String , duration:number):Observable<VirtualMachine[]>{
 
 
-       return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}/${version}/${duration}`)
-  
-  
+       return this.httpClient.get<VirtualMachine[]>(`${this.availableVMs}/${startDate}/${product}/${duration}`)
+
+
       }
 
-      // getAvailableVirtualMachineListFiltered(startDate:Date):Observable<VirtualMachine[]>{
 
 
-      //   return this.httpClient.get(`${this.availableVMs}/${startDate}`).map((response : Response) => response.json())
-   
-   
-      //  }
 
-      
   getVirtualMachineByTrainingSessions(trainingSessionId: number):Observable<VirtualMachine[]>{
     return this.httpClient.get<VirtualMachine[]>(`${this.availableVMsForTS}/${trainingSessionId}`)
   }

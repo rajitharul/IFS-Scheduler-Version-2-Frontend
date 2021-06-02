@@ -1,105 +1,143 @@
 <br><br>
-<div>
-    <h2>
-        Training Session Details
-    </h2>
-    <div class="row">
+<div class=" shadow p-3 mb-5 bg-white rounded">
 
-        <div class="col">
+  <h1 style="color:black;">
+    <b>View Training Session Details</b>
+  </h1>
 
-        </div>
+  <div>
+    <label>
+      <b>Session Name :</b>
+    </label>
+    {{trainingSession.sessionName}}
+  </div>
 
-        <div class="col" id="details">
-            <div>
-                <label>
-                <b >Session Name :</b>
-            </label> {{trainingSession.sessionName}}
-            </div>
+  <div>
+    <label>
+      <b>Trainer / Trainers :</b>
+    </label>
+    <tr *ngFor="let trainer of trainingSession.trainers">
+      <td>{{ trainer.name }} : Id - {{trainer.trainerId}}</td>
+    </tr>
+  </div>
 
-            <div>
-                <label>
-                <b>Start Date:</b>
-            </label> {{trainingSession.startDate}}
-            </div>
+  <div>
+    <label>
+      <b>Start Date:</b>
+    </label>
+    {{trainingSession.startDate}}
+  </div>
 
-            <div>
-                <label>
-                <b>Duration  :</b>
-            </label> {{trainingSession.duration}}
-            </div>
+  <div>
+    <label>
+      <b>Duration :</b>
+    </label>
+    {{trainingSession.duration}}
+  </div>
 
-            <div>
-                <label>
-                <b>Max Participants :</b>
-            </label> {{trainingSession.maxParticipants}}
-            </div>
+  <div>
+    <label>
+      <b>Max Participants :</b>
+    </label>
+    {{trainingSession.maxParticipants}}
+  </div>
 
-            <div>
-                <label>
-                <b>IFS Application Version :</b>
-            </label> {{trainingSession.ifsApplicationVersion}}
-            </div>
+  <div>
+    <label>
+      <b>IFS Application Version :</b>
+    </label>
+    {{trainingSession.ifsApplicationVersion}}
+  </div>
 
-            <div>
-                <label>
-                <b>Buffer Time:</b>
-            </label> {{trainingSession.bufferTime}}
-            </div>
+  <div>
+    <label>
+      <b>Buffer Time:</b>
+    </label>
+    {{trainingSession.bufferTime}}
+  </div>
 
-            <div>
-                <label>
-                <b>Manager Comment :</b>
-            </label> {{trainingSession.managerComment}}
-            </div>
+  <div>
+    <label>
+      <b>Manager Comment :</b>
+    </label>
+    {{trainingSession.managerComment}}
+  </div>
 
-            <div>
-                <label>
-                <b>Delivery Method :</b>
-            </label> {{trainingSession.deliveryMethod}}
-            </div>
+  <div>
+    <label>
+      <b>Type :</b>
+    </label>
+    {{trainingSession.type}}
+  </div>
 
+  <div>
+    <label>
+      <b>Delivery Method :</b>
+    </label>
+    {{trainingSession.deliveryMethod}}
+  </div>
 
-            <div>
-                <label>
-                <b>Location  :</b>
-            </label> {{trainingSession.location.locationName}}
-            </div>
+  <div>
+    <label>
+      <b>Latest allocation of Virtual Machines :</b>
+    </label>
+    <tr *ngFor="let tempVirtualMachine of trainingSession.virtualMachines">
+      <td>{{ tempVirtualMachine.name }} : Id - {{tempVirtualMachine.name}}</td>
+    </tr>
+  </div>
 
+  <div *ngIf="authority === 'trainer'">
+    <label>
+      <b>Free Virtual Machines :</b>
+    </label>
+    <tr *ngFor="let freeVirtualMachine of freeVirtualMachines">
+      <td>{{ freeVirtualMachine.virtualMachineName }} : Id - {{freeVirtualMachine.virtualMachineId}}</td>
+    </tr>
+  </div>
 
-            <div>
-                <label>
-                <b>Training Room  :</b>
-            </label> {{trainingSession.trainingRoom.id}} {{trainingSession.trainingRoom.capacity}}
-            </div>
-
-            
-            <div>
-                <label>
-                <b>Training Cordinator  :</b>
-            </label> {{trainingSession.trainingCordinator.name}} 
-            </div>
-
-
-
-
-
-            <div>
-                <label>
-                  <b>Trainer :</b>
-
-                  <ul *ngFor="let trainer of trainingSession.trainers" >
-                    Id is : {{trainer.trainerId}}  Name :  {{trainer.name}}  specialities  are {{trainer.qualifications}}  
-                  </ul>
-                  
-                </label>
-            </div>
-
-        </div>
-
-        <div class="col">
-
-        </div>
-
-
-    </div>
 </div>
+
+
+
+<form (ngSubmit)="getAvailableVM()" *ngIf="authority === 'trainer'">
+
+  <div class="form-group">
+    <label style="color: black;">
+      Available VM's
+    </label>
+
+  </div>
+
+  <Br>
+  <button class="btn btn-dark" type="submit">Get Available VM's</button>
+
+</form>
+
+<br>
+
+<form (ngSubmit)="addVm()" *ngIf="authority === 'trainer'">
+
+  <div class="form-group">
+    <label style="color: black;">
+      VM ID
+    </label>
+
+    <input type="number" class="form-control" id="vmId" [(ngModel)]="virtualMachineId" name="vmId">
+
+
+
+
+
+
+
+  </div>
+
+
+  <button class="btn btn-dark" type="submit">Add Vm</button>
+
+</form>
+
+
+
+<br>
+<button class="btn btn-success" (click)="allocateVMs()" *ngIf="authority === 'trainer'">Update</button>

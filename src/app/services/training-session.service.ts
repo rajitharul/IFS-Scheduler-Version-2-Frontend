@@ -12,7 +12,7 @@ export class TrainingSessionService {
   private baseURL ="http://localhost:8080/api/trainingSessions";
   private baseURL2 = "http://localhost:8080/api/trainingSessionByTrainer";
   private sortedTrainingSessionURL ="http://localhost:8080/api/sort/trainingSessions";
-
+  private baseURL3 = "http://localhost:8080/api/trainingSessionVm";
 
   constructor(private httpClient:HttpClient) { }
 
@@ -35,6 +35,12 @@ export class TrainingSessionService {
   updateTrainingSession(id:number, trainingSession: TrainingSession):Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${id}`,trainingSession);
   }
+
+  updateTrainingSessionVm(id:number, trainingSession: TrainingSession):Observable<Object>{
+    return this.httpClient.put(`${this.baseURL3}/${id}`,trainingSession);
+  }
+
+
   deleteTrainingSession(id:number):Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
